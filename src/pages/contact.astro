@@ -1,0 +1,233 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import Button from '../components/ui/Button.astro';
+import Badge from '../components/ui/Badge.astro';
+---
+
+<Layout
+  title="Contact | Bagus Kurniawan"
+  description="Contact Bagus Kurniawan for full-time software engineering and backend development opportunities."
+>
+  <div class="py-4 md:py-8 max-w-4xl mx-auto">
+    <SectionHeading
+      eyebrow="COMMUNICATION / INQUIRIES"
+      title="Let's build something useful."
+      description="I'm currently open to full-time Software Engineering opportunities, international startup roles, and remote positions."
+    />
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <!-- Direct Contact Channels (5 Cols) -->
+      <div class="lg:col-span-5 space-y-6">
+        <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6">
+          <h3 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-4">
+            Direct Communication
+          </h3>
+
+          <div class="space-y-4 text-xs font-mono">
+            <div>
+              <span class="block text-zinc-400 dark:text-zinc-500 mb-1">Email Address</span>
+              <a
+                href="mailto:bagus.kurniawan@example.com"
+                class="text-sm font-semibold text-zinc-900 dark:text-zinc-100 hover:text-blue-600 dark:hover:text-blue-400 break-all"
+              >
+                bagus.kurniawan@example.com
+              </a>
+              <span class="block text-zinc-400 dark:text-zinc-500 text-[10px] mt-0.5">
+                [Placeholder — replace with primary email]
+              </span>
+            </div>
+
+            <div class="pt-3 border-t border-zinc-100 dark:border-zinc-800">
+              <span class="block text-zinc-400 dark:text-zinc-500 mb-1">GitHub Profile</span>
+              <a
+                href="https://github.com/kurngxtech/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm font-semibold text-zinc-900 dark:text-zinc-100 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1"
+              >
+                github.com/kurngxtech ↗
+              </a>
+            </div>
+
+            <div class="pt-3 border-t border-zinc-100 dark:border-zinc-800">
+              <span class="block text-zinc-400 dark:text-zinc-500 mb-1">LinkedIn</span>
+              <span class="text-zinc-500 dark:text-zinc-400 italic">
+                [Placeholder — URL to be provided]
+              </span>
+            </div>
+
+            <div class="pt-3 border-t border-zinc-100 dark:border-zinc-800">
+              <span class="block text-zinc-400 dark:text-zinc-500 mb-1">WhatsApp & Phone</span>
+              <span class="text-zinc-500 dark:text-zinc-400 italic">
+                [Available upon interview request]
+              </span>
+            </div>
+
+            <div class="pt-3 border-t border-zinc-100 dark:border-zinc-800">
+              <span class="block text-zinc-400 dark:text-zinc-500 mb-1">Curriculum Vitae</span>
+              <a
+                href="/resume"
+                class="text-blue-600 dark:text-blue-400 font-semibold hover:underline"
+              >
+                View / Download CV →
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed font-mono">
+          <span class="font-bold text-zinc-900 dark:text-zinc-100 block mb-1">Response Time:</span>
+          I typically reply to professional inquiries and recruiting messages within 24 to 48 business hours.
+        </div>
+      </div>
+
+      <!-- Contact Form (7 Cols) -->
+      <div class="lg:col-span-7">
+        <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 md:p-8">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+              Send a Direct Message
+            </h3>
+            <Badge variant="outline">Client-Side Validated</Badge>
+          </div>
+
+          <form id="contact-form" class="space-y-4" novalidate>
+            <!-- Honeypot for spam bot mitigation -->
+            <div class="hidden" aria-hidden="true">
+              <label for="honeypot-website">Do not fill this out</label>
+              <input type="text" id="honeypot-website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div>
+              <label for="contact-name" class="block text-xs font-mono font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+                Your Name <span class="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="contact-name"
+                name="name"
+                required
+                maxlength="80"
+                placeholder="e.g. Alex Smith"
+                class="w-full px-3.5 py-2.5 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-colors"
+              />
+              <span id="name-error" class="hidden text-xs text-red-500 font-mono mt-1">Please enter your name.</span>
+            </div>
+
+            <div>
+              <label for="contact-email" class="block text-xs font-mono font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+                Your Email <span class="text-red-500">*</span>
+              </label>
+              <input
+                type="email"
+                id="contact-email"
+                name="email"
+                required
+                maxlength="100"
+                placeholder="alex@company.com"
+                class="w-full px-3.5 py-2.5 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-colors"
+              />
+              <span id="email-error" class="hidden text-xs text-red-500 font-mono mt-1">Please enter a valid email address.</span>
+            </div>
+
+            <div>
+              <label for="contact-subject" class="block text-xs font-mono font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+                Subject
+              </label>
+              <input
+                type="text"
+                id="contact-subject"
+                name="subject"
+                maxlength="120"
+                placeholder="Full-time opportunity / Collaboration"
+                class="w-full px-3.5 py-2.5 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-colors"
+              />
+            </div>
+
+            <div>
+              <label for="contact-message" class="block text-xs font-mono font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+                Message <span class="text-red-500">*</span>
+              </label>
+              <textarea
+                id="contact-message"
+                name="message"
+                required
+                rows="4"
+                maxlength="2000"
+                placeholder="Tell me about your team, system requirements, or open engineering role..."
+                class="w-full px-3.5 py-2.5 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-colors resize-y"
+              ></textarea>
+              <span id="message-error" class="hidden text-xs text-red-500 font-mono mt-1">Please include a message with at least 10 characters.</span>
+            </div>
+
+            <div id="form-success" class="hidden p-4 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-xs font-mono text-emerald-700 dark:text-emerald-300">
+              Thank you for reaching out! Your message was validated. Since this site is statically hosted, you can also email directly at bagus.kurniawan@example.com.
+            </div>
+
+            <div class="pt-2">
+              <Button type="submit" variant="primary" class="w-full sm:w-auto">
+                Send Message
+              </Button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const nameInput = document.getElementById('contact-name') as HTMLInputElement | null;
+  const emailInput = document.getElementById('contact-email') as HTMLInputElement | null;
+  const messageInput = document.getElementById('contact-message') as HTMLTextAreaElement | null;
+  const honeypot = document.getElementById('honeypot-website') as HTMLInputElement | null;
+
+  const nameError = document.getElementById('name-error');
+  const emailError = document.getElementById('email-error');
+  const messageError = document.getElementById('message-error');
+  const formSuccess = document.getElementById('form-success');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Honeypot spam check
+    if (honeypot && honeypot.value.trim() !== '') {
+      return;
+    }
+
+    let isValid = true;
+
+    // Validate Name
+    if (!nameInput || nameInput.value.trim().length < 2) {
+      nameError?.classList.remove('hidden');
+      isValid = false;
+    } else {
+      nameError?.classList.add('hidden');
+    }
+
+    // Validate Email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailInput || !emailRegex.test(emailInput.value.trim())) {
+      emailError?.classList.remove('hidden');
+      isValid = false;
+    } else {
+      emailError?.classList.add('hidden');
+    }
+
+    // Validate Message
+    if (!messageInput || messageInput.value.trim().length < 10) {
+      messageError?.classList.remove('hidden');
+      isValid = false;
+    } else {
+      messageError?.classList.add('hidden');
+    }
+
+    if (isValid) {
+      formSuccess?.classList.remove('hidden');
+      form.reset();
+    }
+  });
+</script>
+

@@ -1,0 +1,169 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Badge from '../../components/ui/Badge.astro';
+import { projects } from '../../data/projects';
+
+const project = projects.find((p) => p.slug === 'smartwaste')!;
+---
+
+<Layout
+  title={`${project.title} — Case Study | Bagus Kurniawan`}
+  description={project.description}
+>
+  <div class="py-4 md:py-8 max-w-4xl mx-auto">
+    <!-- Back Navigation -->
+    <div class="mb-8">
+      <a
+        href="/projects"
+        class="inline-flex items-center text-xs font-mono text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+      >
+        <span class="mr-1">←</span> Back to Projects
+      </a>
+    </div>
+
+    <!-- Case Study Header -->
+    <header class="border-b border-zinc-200 dark:border-zinc-800 pb-8 mb-10">
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <Badge variant="accent">{project.category}</Badge>
+        <Badge variant="outline">{project.status}</Badge>
+        <span class="text-xs font-mono text-zinc-400 dark:text-zinc-500">
+          {project.year}
+        </span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-4">
+        {project.title}
+      </h1>
+
+      <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-3xl">
+        {project.description}
+      </p>
+
+      <!-- Project Metadata Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 pt-6 border-t border-zinc-100 dark:border-zinc-800/80 text-xs font-mono">
+        <div>
+          <span class="block text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-1">Role</span>
+          <span class="font-semibold text-zinc-800 dark:text-zinc-200">{project.role}</span>
+        </div>
+        <div>
+          <span class="block text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-1">Tech Stack</span>
+          <span class="font-semibold text-zinc-800 dark:text-zinc-200">Angular · MongoDB</span>
+        </div>
+        <div>
+          <span class="block text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-1">Context</span>
+          <span class="font-semibold text-zinc-800 dark:text-zinc-200">Academic Initiative</span>
+        </div>
+        <div>
+          <span class="block text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-1">Repository</span>
+          <a
+            href="https://github.com/kurngxtech/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            GitHub Profile ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Tech Stack Badges -->
+      <div class="mt-6 flex flex-wrap gap-1.5">
+        {project.technologies.map((t) => (
+          <Badge variant="default" size="sm">{t}</Badge>
+        ))}
+      </div>
+    </header>
+
+    <!-- Case Study Body -->
+    <div class="space-y-12 text-zinc-700 dark:text-zinc-300 leading-relaxed text-sm md:text-base">
+      <!-- 01 / Problem & Target Users -->
+      <section>
+        <h2 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-2">
+          01 / Problem & Motivation
+        </h2>
+        <h3 class="text-xl md:text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-4">
+          Minimizing Food Waste via Digital Tracking
+        </h3>
+        <p class="mb-4">
+          Household and community food waste frequently occurs because consumers lack convenient visibility into item shelf lives, purchase dates, and surplus availability.
+        </p>
+        <p>
+          SmartWaste was conceptualized as a web application to bridge this gap, helping users log inventory, receive expiration alerts, and identify surplus food items before spoilage occurs.
+        </p>
+        <div class="p-4 rounded-lg bg-zinc-100/70 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mt-4">
+          <em>Verification Note: In accordance with project guidelines, no speculative carbon reduction or arbitrary environmental metrics are claimed without audited empirical data.</em>
+        </div>
+      </section>
+
+      <!-- 02 / Solution & Planned Features -->
+      <section>
+        <h2 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-2">
+          02 / Solution Architecture
+        </h2>
+        <h3 class="text-xl md:text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-4">
+          Web Application Workflow
+        </h3>
+        <ul class="space-y-2 mb-4 font-mono text-xs sm:text-sm">
+          <li class="flex items-start gap-2">
+            <span class="text-blue-500 font-bold">↳</span>
+            <span>Food item logging and categorical storage breakdown.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-blue-500 font-bold">↳</span>
+            <span>Expiration timeline calculation and status indicators.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-blue-500 font-bold">↳</span>
+            <span>[DETAILED FEATURE BREAKDOWN TO BE DOCUMENTED FROM PROJECT REPORT]</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 03 / Database & Technical Challenge -->
+      <section>
+        <h2 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-2">
+          03 / Technical Implementation & Challenges
+        </h2>
+        <h3 class="text-xl md:text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-4">
+          Flexible Document Schemas in MongoDB
+        </h3>
+        <p class="mb-4">
+          Because perishable goods carry diverse metadata attributes (chilled vs frozen, packaged vs produce, perishable intervals), MongoDB was selected for its schema flexibility.
+        </p>
+        <div class="p-4 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 font-mono text-xs text-zinc-600 dark:text-zinc-400">
+          [TECHNICAL IMPLEMENTATION AND EXPERIENCED CHALLENGES TO BE UPDATED FROM REPORT]
+        </div>
+      </section>
+
+      <!-- 04 / Result -->
+      <section>
+        <h2 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-2">
+          04 / Result
+        </h2>
+        <h3 class="text-xl md:text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-4">
+          Academic Project Delivery
+        </h3>
+        <p>
+          The project successfully demonstrated an end-to-end full-stack web application combining an Angular client with MongoDB storage for food inventory management.
+        </p>
+      </section>
+    </div>
+
+    <!-- Case Study Footer Navigation -->
+    <div class="mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
+      <a
+        href="/projects/cinema-ticketing"
+        class="text-xs font-mono text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400"
+      >
+        ← Previous: Cinema Ticketing
+      </a>
+      <a
+        href="/projects/android-health"
+        class="text-xs font-mono text-blue-600 dark:text-blue-400 hover:underline"
+      >
+        Next: Android Health →
+      </a>
+    </div>
+  </div>
+</Layout>
+

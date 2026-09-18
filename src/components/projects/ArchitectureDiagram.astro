@@ -1,0 +1,83 @@
+---
+export interface Props {
+  title?: string;
+  steps?: { title: string; subtitle?: string; items?: string[] }[];
+}
+
+const {
+  title = 'System Architecture Flow',
+  steps = [
+    {
+      title: 'Client Layer',
+      subtitle: 'Public & Admin Web Interfaces',
+      items: ['React + TypeScript Landing Page', 'Protected Studio Admin CMS', 'Client Contact Inquiry Form'],
+    },
+    {
+      title: 'Routing & Edge',
+      subtitle: 'Static Hosting & CI/CD',
+      items: ['Vercel Edge Platform', 'GitHub Actions Automation', 'Playwright Test Verification'],
+    },
+    {
+      title: 'Backend-as-a-Service',
+      subtitle: 'Supabase Managed Infrastructure',
+      items: ['Supabase Authentication (JWT)', 'Session Token Verification', 'RESTful API Access'],
+    },
+    {
+      title: 'Database & Security Core',
+      subtitle: 'PostgreSQL Engine',
+      items: ['PostgreSQL Tables & Schema', 'Row Level Security (RLS) Policies', 'Encrypted Data at Rest'],
+    },
+  ],
+} = Astro.props;
+---
+
+<div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/40 p-6 md:p-8">
+  <div class="flex items-center justify-between mb-6 pb-4 border-b border-zinc-200 dark:border-zinc-800">
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+      <h4 class="text-sm font-mono font-medium uppercase tracking-wider text-zinc-800 dark:text-zinc-200">
+        {title}
+      </h4>
+    </div>
+    <span class="text-xs font-mono text-zinc-400 dark:text-zinc-500">Verified Flow</span>
+  </div>
+
+  <div class="space-y-4">
+    {
+      steps.map((step, index) => (
+        <div class="relative">
+          <div class="rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900 p-4 transition-colors hover:border-zinc-300 dark:hover:border-zinc-700">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-2">
+              <span class="text-xs font-mono font-semibold text-blue-600 dark:text-blue-400">
+                0{index + 1} / {step.title}
+              </span>
+              {step.subtitle && (
+                <span class="text-xs font-mono text-zinc-500 dark:text-zinc-400">
+                  {step.subtitle}
+                </span>
+              )}
+            </div>
+
+            {step.items && step.items.length > 0 && (
+              <ul class="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-2 pt-2 border-t border-zinc-100 dark:border-zinc-800/60">
+                {step.items.map((item) => (
+                  <li class="text-xs text-zinc-600 dark:text-zinc-400 flex items-center gap-1.5 font-mono">
+                    <span class="text-zinc-400 dark:text-zinc-600">↳</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {index < steps.length - 1 && (
+            <div class="flex justify-center my-1.5" aria-hidden="true">
+              <span class="font-mono text-xs text-zinc-400 dark:text-zinc-600">↓</span>
+            </div>
+          )}
+        </div>
+      ))
+    }
+  </div>
+</div>
+

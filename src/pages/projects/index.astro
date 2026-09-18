@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
+import ProjectCard from '../../components/projects/ProjectCard.astro';
+import { projects } from '../../data/projects';
+
+const productionProjects = projects.filter((p) => p.slug === 'saint-ink-tattoo');
+const academicProjects = projects.filter((p) => p.slug !== 'saint-ink-tattoo');
+---
+
+<Layout
+  title="Projects & Work | Bagus Kurniawan"
+  description="Explore production, academic, and open-source software engineering projects by Bagus Kurniawan."
+>
+  <div class="py-4 md:py-8">
+    <SectionHeading
+      eyebrow="WORK / PORTFOLIO"
+      title="Engineering Projects"
+      description="Detailed case studies documenting software architecture, technical implementation, and problem-solving across production and academic systems."
+    />
+
+    <!-- Production Section -->
+    <div class="mb-12">
+      <div class="flex items-center gap-2 mb-6">
+        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+        <h3 class="text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold">
+          Production & Internship Platforms
+        </h3>
+      </div>
+      <div class="space-y-6">
+        {productionProjects.map((p) => (
+          <ProjectCard project={p} featured={true} />
+        ))}
+      </div>
+    </div>
+
+    <!-- Academic & Community Projects -->
+    <div>
+      <div class="flex items-center gap-2 mb-6">
+        <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+        <h3 class="text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold">
+          Academic & Community Systems
+        </h3>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {academicProjects.map((p) => (
+          <ProjectCard project={p} featured={false} />
+        ))}
+      </div>
+    </div>
+  </div>
+</Layout>
+

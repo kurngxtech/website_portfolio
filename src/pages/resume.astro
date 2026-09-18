@@ -1,0 +1,151 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import Button from '../components/ui/Button.astro';
+import Badge from '../components/ui/Badge.astro';
+import { skillsData } from '../data/projects';
+---
+
+<Layout
+  title="Resume / CV | Bagus Kurniawan"
+  description="Curriculum Vitae and professional software engineering profile for Bagus Kurniawan."
+>
+  <div class="py-4 md:py-8 max-w-3xl mx-auto">
+    <!-- Header with Action -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-6 mb-8">
+      <div>
+        <span class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold block mb-1">
+          CURRICULUM VITAE
+        </span>
+        <h1 class="text-3xl font-bold text-zinc-900 dark:text-zinc-50">
+          Bagus Kurniawan
+        </h1>
+        <p class="text-sm font-mono text-zinc-600 dark:text-zinc-400 mt-1">
+          Software Engineer · Backend & Cloud Focus
+        </p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <Button href="/cv-placeholder.txt" download="Bagus_Kurniawan_CV.txt" variant="primary" size="sm">
+          <svg class="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          Download CV
+        </Button>
+      </div>
+    </div>
+
+    <div class="space-y-8 text-zinc-700 dark:text-zinc-300 leading-relaxed text-sm">
+      <!-- Summary -->
+      <section>
+        <h2 class="text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold mb-2">
+          Professional Summary
+        </h2>
+        <p class="text-sm sm:text-base text-zinc-800 dark:text-zinc-200 leading-relaxed">
+          Information Systems student and software developer with production internship experience. Hands-on expertise building and deploying web platforms using React, TypeScript, Supabase, PostgreSQL, and Angular, with automated testing via Playwright and GitHub Actions. Actively deepening skills in backend architecture, cloud infrastructure, and application security.
+        </p>
+      </section>
+
+      <!-- Experience -->
+      <section class="border-t border-zinc-100 dark:border-zinc-800 pt-6">
+        <h2 class="text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold mb-4">
+          Experience
+        </h2>
+
+        <div class="space-y-4">
+          <div class="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
+              <h3 class="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+                Software Development Intern (Backend Developer)
+              </h3>
+              <span class="text-xs font-mono text-zinc-400">2026</span>
+            </div>
+            <p class="text-xs font-mono text-blue-600 dark:text-blue-400 mb-2">
+              [Company Name — Placeholder] · Saint Ink Tattoo Production Platform
+            </p>
+            <ul class="list-disc pl-5 space-y-1 text-xs sm:text-sm text-zinc-600 dark:text-zinc-300">
+              <li>Co-developed production web platform and custom Content Management System (CMS) in a 2-person engineering team.</li>
+              <li>Configured PostgreSQL Row Level Security (RLS) on Supabase ensuring strict database authorization rules.</li>
+              <li>Architected token-based authentication session handling and protected CMS routing.</li>
+              <li>Authored Playwright automated end-to-end test suites and configured continuous integration via GitHub Actions.</li>
+              <li>Deployed platform to production environment via Vercel.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section class="border-t border-zinc-100 dark:border-zinc-800 pt-6">
+        <h2 class="text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold mb-3">
+          Education
+        </h2>
+        <div class="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60">
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+            <h3 class="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+              Bachelor's Degree in Information Systems / IT
+            </h3>
+            <span class="text-xs font-mono text-zinc-400">In Progress</span>
+          </div>
+          <p class="text-xs font-mono text-zinc-500 dark:text-zinc-400 mt-1">
+            [University Name — Placeholder until provided] · Indonesia
+          </p>
+        </div>
+      </section>
+
+      <!-- Technical Skills -->
+      <section class="border-t border-zinc-100 dark:border-zinc-800 pt-6">
+        <h2 class="text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold mb-3">
+          Technical Competencies
+        </h2>
+        <div class="space-y-3 text-xs font-mono">
+          <div>
+            <span class="text-zinc-400 block mb-1">Languages:</span>
+            <span class="text-zinc-800 dark:text-zinc-200 font-medium">
+              {skillsData.languages.join(' · ')}
+            </span>
+          </div>
+          <div>
+            <span class="text-zinc-400 block mb-1">Frontend:</span>
+            <span class="text-zinc-800 dark:text-zinc-200 font-medium">
+              {skillsData.frontend.join(' · ')}
+            </span>
+          </div>
+          <div>
+            <span class="text-zinc-400 block mb-1">Backend & Databases:</span>
+            <span class="text-zinc-800 dark:text-zinc-200 font-medium">
+              {[...skillsData.backend, ...skillsData.databases].join(' · ')}
+            </span>
+          </div>
+          <div>
+            <span class="text-zinc-400 block mb-1">Testing & DevOps:</span>
+            <span class="text-zinc-800 dark:text-zinc-200 font-medium">
+              {[...skillsData.testing, ...skillsData.devops].join(' · ')}
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Key Projects -->
+      <section class="border-t border-zinc-100 dark:border-zinc-800 pt-6">
+        <h2 class="text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold mb-3">
+          Verified Projects
+        </h2>
+        <div class="space-y-3 text-xs sm:text-sm">
+          <div>
+            <strong class="text-zinc-900 dark:text-zinc-100">Saint Ink Tattoo:</strong>
+            <span class="text-zinc-600 dark:text-zinc-300"> Production web platform and custom CMS built with React, TypeScript, Supabase, and PostgreSQL RLS.</span>
+          </div>
+          <div>
+            <strong class="text-zinc-900 dark:text-zinc-100">Cinema Ticketing System:</strong>
+            <span class="text-zinc-600 dark:text-zinc-300"> Multi-role booking platform for Customers, Organizers, and Admins using Angular and MongoDB.</span>
+          </div>
+          <div>
+            <strong class="text-zinc-900 dark:text-zinc-100">SmartWaste:</strong>
+            <span class="text-zinc-600 dark:text-zinc-300"> Food waste minimization platform built with Angular, TypeScript, and MongoDB.</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>
+

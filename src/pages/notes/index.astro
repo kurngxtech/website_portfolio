@@ -1,0 +1,62 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
+import Badge from '../../components/ui/Badge.astro';
+import { notes } from '../../data/notes';
+---
+
+<Layout
+  title="Technical Notes | Bagus Kurniawan"
+  description="Technical articles and engineering reflections on backend architecture, security, and web performance by Bagus Kurniawan."
+>
+  <div class="py-4 md:py-8 max-w-4xl mx-auto">
+    <SectionHeading
+      eyebrow="WRITING / NOTES"
+      title="Engineering Notes"
+      description="Lessons, debugging investigations, and architectural reflections from real-world software engineering."
+    />
+
+    <div class="space-y-6">
+      {
+        notes.map((note, index) => (
+          <article class="group relative rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 md:p-8 transition-all hover:border-zinc-300 dark:hover:border-zinc-700">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono mb-3">
+              <span class="text-blue-600 dark:text-blue-400 font-semibold">
+                0{index + 1} / {note.category}
+              </span>
+              <span class="text-zinc-400 dark:text-zinc-500">
+                {note.date} · {note.readingTime}
+              </span>
+            </div>
+
+            <h3 class="text-xl md:text-2xl font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              <a href={`/notes/${note.slug}`} class="focus:outline-none">
+                <span class="absolute inset-0 z-10" aria-hidden="true" />
+                {note.title}
+              </a>
+            </h3>
+
+            <p class="mt-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-3xl">
+              {note.summary}
+            </p>
+
+            <div class="mt-6 pt-4 border-t border-zinc-100 dark:border-zinc-800/80 flex flex-wrap items-center justify-between gap-3">
+              <div class="flex flex-wrap gap-1.5">
+                {note.technologies.map((t) => (
+                  <Badge variant="default" size="sm">
+                    {t}
+                  </Badge>
+                ))}
+              </div>
+
+              <span class="text-xs font-mono font-medium text-blue-600 dark:text-blue-400 group-hover:translate-x-0.5 transition-transform inline-flex items-center">
+                Read note <span class="ml-1" aria-hidden="true">→</span>
+              </span>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</Layout>
+

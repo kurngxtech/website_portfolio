@@ -1,11 +1,351 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Button from '../components/ui/Button.astro';
+import Badge from '../components/ui/Badge.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import ProjectCard from '../components/projects/ProjectCard.astro';
+import { projects, skillsData, learningAreas } from '../data/projects';
+import { notes } from '../data/notes';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const featuredProjects = projects.filter((p) => p.featured);
+const secondaryProjects = projects.filter((p) => !p.featured);
+const recentNotes = notes.slice(0, 3);
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Bagus Kurniawan | Software Engineer">
+  <!-- HERO SECTION -->
+  <section class="py-6 md:py-14 border-b border-zinc-200 dark:border-zinc-800/80">
+    <!-- Availability Indicator -->
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-200 bg-emerald-50/80 dark:border-emerald-900/60 dark:bg-emerald-950/30 text-xs font-mono text-emerald-700 dark:text-emerald-400 mb-6">
+      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true"></span>
+      <span>Open to full-time opportunities</span>
+    </div>
+
+    <!-- Main Headline -->
+    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+      Bagus Kurniawan
+    </h1>
+    <p class="mt-2 text-lg sm:text-xl font-mono font-medium text-blue-600 dark:text-blue-400">
+      Software Engineer
+    </p>
+
+    <!-- Supporting Positioning -->
+    <p class="mt-4 text-base sm:text-lg text-zinc-600 dark:text-zinc-300 max-w-2xl leading-relaxed">
+      Building reliable web applications and production-ready systems, with a growing focus on backend engineering, cloud infrastructure, and application security.
+    </p>
+
+    <p class="mt-2 text-xs font-mono text-zinc-500 dark:text-zinc-400">
+      Based in Indonesia · Open to remote international opportunities
+    </p>
+
+    <!-- CTAs -->
+    <div class="mt-8 flex flex-wrap items-center gap-3">
+      <Button href="#selected-work" variant="primary">
+        View Projects
+      </Button>
+      <Button href="https://github.com/kurngxtech/" target="_blank" rel="noopener noreferrer" variant="outline">
+        <svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+        </svg>
+        GitHub
+      </Button>
+      <Button href="/resume" variant="ghost">
+        Download CV
+      </Button>
+    </div>
+
+    <!-- Subtle Technical Metadata Box -->
+    <div class="mt-10 p-4 rounded-lg border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/50 dark:bg-zinc-900/40 max-w-xl">
+      <span class="block text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2 font-medium">
+        Currently working with
+      </span>
+      <div class="flex flex-wrap gap-2 text-xs font-mono text-zinc-700 dark:text-zinc-300">
+        <span class="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">TypeScript</span>
+        <span class="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">React</span>
+        <span class="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">Angular</span>
+        <span class="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">Node.js</span>
+        <span class="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">PostgreSQL</span>
+        <span class="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">Supabase</span>
+        <span class="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">Docker</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SELECTED WORK SECTION -->
+  <section id="selected-work" class="py-12 md:py-16 border-b border-zinc-200 dark:border-zinc-800/80">
+    <SectionHeading
+      eyebrow="01 / SELECTED WORK"
+      title="Featured Projects"
+      description="Projects built through academic, personal, and production experience, emphasizing system architecture and practical engineering."
+    />
+
+    <div class="space-y-6">
+      {featuredProjects.map((project) => (
+        <ProjectCard project={project} featured={project.slug === 'saint-ink-tattoo'} />
+      ))}
+    </div>
+
+    <!-- Secondary Projects Subsection -->
+    <div class="mt-12 pt-8 border-t border-zinc-100 dark:border-zinc-800/80">
+      <h3 class="text-sm font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-6 font-medium">
+        Other Noteworthy Projects
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {secondaryProjects.map((project) => (
+          <ProjectCard project={project} featured={false} />
+        ))}
+      </div>
+    </div>
+
+    <div class="mt-8 text-center">
+      <a
+        href="/projects"
+        class="inline-flex items-center text-xs font-mono font-medium text-blue-600 dark:text-blue-400 hover:underline"
+      >
+        View all project documentation and architecture details <span class="ml-1" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE SUMMARY SECTION -->
+  <section class="py-12 md:py-16 border-b border-zinc-200 dark:border-zinc-800/80">
+    <SectionHeading
+      eyebrow="02 / EXPERIENCE"
+      title="Professional Experience"
+      description="Hands-on software development in production team environments."
+    />
+
+    <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 md:p-8">
+      <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-2">
+        <h3 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+          Software Development Intern
+        </h3>
+        <span class="text-xs font-mono text-zinc-500 dark:text-zinc-400">
+          2026 · [Company name — placeholder until provided]
+        </span>
+      </div>
+
+      <div class="flex items-center gap-2 mb-4 text-xs font-mono text-blue-600 dark:text-blue-400">
+        <span>Role: Backend Developer</span>
+        <span>·</span>
+        <span>Project: Saint Ink Tattoo</span>
+      </div>
+
+      <p class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-3xl">
+        Contributed to a production web platform as part of a two-person development team, with responsibilities spanning backend-oriented development, CMS functionality, authentication, database integration, security controls, testing, CI/CD, and production deployment.
+      </p>
+
+      <div class="mt-4 pt-4 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between">
+        <div class="flex flex-wrap gap-1.5">
+          <Badge size="sm">React</Badge>
+          <Badge size="sm">TypeScript</Badge>
+          <Badge size="sm">Supabase</Badge>
+          <Badge size="sm">PostgreSQL RLS</Badge>
+          <Badge size="sm">Playwright</Badge>
+        </div>
+        <a
+          href="/projects/saint-ink-tattoo"
+          class="text-xs font-mono font-medium text-blue-600 dark:text-blue-400 hover:underline"
+        >
+          View Case Study →
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-6 text-right">
+      <a href="/experience" class="text-xs font-mono font-medium text-blue-600 dark:text-blue-400 hover:underline">
+        Detailed experience timeline →
+      </a>
+    </div>
+  </section>
+
+  <!-- TECHNICAL SKILLS SECTION -->
+  <section class="py-12 md:py-16 border-b border-zinc-200 dark:border-zinc-800/80">
+    <SectionHeading
+      eyebrow="03 / TECHNICAL SKILLS"
+      title="Technologies & Tools"
+      description="Concrete technologies applied across production, internship, and coursework projects. No arbitrary proficiency numbers or star ratings."
+    />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5">
+        <h4 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3">
+          Languages
+        </h4>
+        <div class="flex flex-wrap gap-2">
+          {skillsData.languages.map((skill) => (
+            <Badge variant="default">{skill}</Badge>
+          ))}
+        </div>
+      </div>
+
+      <div class="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5">
+        <h4 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3">
+          Frontend
+        </h4>
+        <div class="flex flex-wrap gap-2">
+          {skillsData.frontend.map((skill) => (
+            <Badge variant="default">{skill}</Badge>
+          ))}
+        </div>
+      </div>
+
+      <div class="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5">
+        <h4 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3">
+          Backend
+        </h4>
+        <div class="flex flex-wrap gap-2">
+          {skillsData.backend.map((skill) => (
+            <Badge variant="default">{skill}</Badge>
+          ))}
+        </div>
+      </div>
+
+      <div class="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5">
+        <h4 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3">
+          Databases
+        </h4>
+        <div class="flex flex-wrap gap-2">
+          {skillsData.databases.map((skill) => (
+            <Badge variant="default">{skill}</Badge>
+          ))}
+        </div>
+      </div>
+
+      <div class="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5">
+        <h4 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3">
+          Testing & QA
+        </h4>
+        <div class="flex flex-wrap gap-2">
+          {skillsData.testing.map((skill) => (
+            <Badge variant="default">{skill}</Badge>
+          ))}
+        </div>
+      </div>
+
+      <div class="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5">
+        <h4 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3">
+          DevOps & Tools
+        </h4>
+        <div class="flex flex-wrap gap-2">
+          {skillsData.devops.map((skill) => (
+            <Badge variant="default">{skill}</Badge>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURRENTLY LEARNING / FUTURE DIRECTION -->
+  <section class="py-12 md:py-16 border-b border-zinc-200 dark:border-zinc-800/80">
+    <SectionHeading
+      eyebrow="04 / CAREER DIRECTION"
+      title="Currently Learning"
+      description="Active engineering focus areas bridging current web development experience with long-term goals in backend, cloud, and security."
+    />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {learningAreas.map((area) => (
+        <div class="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5">
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="text-sm font-mono font-semibold text-zinc-900 dark:text-zinc-100">
+              {area.title}
+            </h4>
+            <span class="text-xs font-mono text-blue-600 dark:text-blue-400">In Progress</span>
+          </div>
+          <p class="text-xs text-zinc-600 dark:text-zinc-400 mb-3 leading-relaxed">
+            {area.description}
+          </p>
+          <div class="flex flex-wrap gap-1.5 pt-2 border-t border-zinc-100 dark:border-zinc-800">
+            {area.topics.map((topic) => (
+              <span class="text-xs font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                {topic}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- NOTES PREVIEW SECTION -->
+  <section class="py-12 md:py-16 border-b border-zinc-200 dark:border-zinc-800/80">
+    <SectionHeading
+      eyebrow="05 / TECHNICAL WRITING"
+      title="Engineering Notes"
+      description="Short technical writeups on lessons learned from debugging, database security, and system architecture."
+    />
+
+    <div class="space-y-4">
+      {recentNotes.map((note) => (
+        <article class="group rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5 transition-colors hover:border-zinc-300 dark:hover:border-zinc-700">
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 text-xs font-mono mb-2">
+            <span class="text-blue-600 dark:text-blue-400">{note.category}</span>
+            <span class="text-zinc-400">{note.date} · {note.readingTime}</span>
+          </div>
+          <h3 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            <a href={`/notes/${note.slug}`}>{note.title}</a>
+          </h3>
+          <p class="mt-2 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            {note.summary}
+          </p>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-6 text-right">
+      <a href="/notes" class="text-xs font-mono font-medium text-blue-600 dark:text-blue-400 hover:underline">
+        Read all notes →
+      </a>
+    </div>
+  </section>
+
+  <!-- ABOUT PREVIEW SECTION -->
+  <section class="py-12 md:py-16 border-b border-zinc-200 dark:border-zinc-800/80">
+    <SectionHeading
+      eyebrow="06 / ABOUT ME"
+      title="Engineering Philosophy"
+      description="Who I am, what drives my work, and how I build software."
+    />
+
+    <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 md:p-8">
+      <blockquote class="text-base sm:text-lg font-medium text-zinc-800 dark:text-zinc-200 italic leading-relaxed border-l-2 border-blue-600 pl-4 mb-4">
+        "I build software that goes beyond modern design—focused on usability, reliability, security, and real-world impact."
+      </blockquote>
+      <p class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+        I’m Bagus Kurniawan, an Information Systems student and software developer with hands-on experience building web and mobile applications, including a production project developed during my internship. My current focus is backend engineering, cloud infrastructure, and application security.
+      </p>
+      <div class="mt-4 pt-4 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+        <span class="text-xs font-mono text-zinc-400 dark:text-zinc-500">
+          Transparency: AI-assisted development disclosure included
+        </span>
+        <a href="/about" class="text-xs font-mono font-medium text-blue-600 dark:text-blue-400 hover:underline">
+          Read full bio & background →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT CTA SECTION -->
+  <section class="py-12 md:py-16">
+    <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-8 md:p-10 text-center max-w-3xl mx-auto">
+      <span class="font-mono text-xs text-blue-600 dark:text-blue-400 uppercase tracking-wider font-semibold">
+        07 / GET IN TOUCH
+      </span>
+      <h2 class="mt-3 text-2xl md:text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+        Let's build something useful.
+      </h2>
+      <p class="mt-3 text-sm text-zinc-600 dark:text-zinc-400 max-w-md mx-auto leading-relaxed">
+        I'm currently open to full-time Software Engineering opportunities and remote engineering roles.
+      </p>
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <Button href="/contact" variant="primary">
+          Contact Me
+        </Button>
+        <Button href="mailto:bagus.kurniawan@example.com" variant="outline">
+          Send Email
+        </Button>
+      </div>
+    </div>
+  </section>
 </Layout>

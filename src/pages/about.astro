@@ -1,0 +1,101 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<Layout
+  title="About | Bagus Kurniawan"
+  description="Background, engineering focus, philosophy, and development methodology of Bagus Kurniawan."
+>
+  <div class="py-4 md:py-8 max-w-3xl mx-auto">
+    <SectionHeading
+      eyebrow="BACKGROUND / PHILOSOPHY"
+      title="About Me"
+      description="Who I am, what I build, and where I am headed as a software engineer."
+    />
+
+    <div class="space-y-10 text-zinc-700 dark:text-zinc-300 leading-relaxed text-sm sm:text-base">
+      <!-- Philosophy Callout -->
+      <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 md:p-8">
+        <span class="block text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-2">
+          Engineering Philosophy
+        </span>
+        <blockquote class="text-base sm:text-lg font-medium text-zinc-900 dark:text-zinc-100 italic border-l-2 border-blue-600 pl-4 py-1">
+          "I build software that goes beyond modern design—focused on usability, reliability, security, and real-world impact."
+        </blockquote>
+      </div>
+
+      <!-- Narrative Bio -->
+      <section class="space-y-4">
+        <h3 class="text-lg sm:text-xl font-semibold text-zinc-900 dark:text-zinc-100">
+          Background & Current Engineering Focus
+        </h3>
+        <p>
+          I'm <strong>Bagus Kurniawan</strong>, an Information Systems student and software developer with hands-on experience building web and mobile applications, including a production project developed during my software engineering internship.
+        </p>
+        <p>
+          My current focus is <strong>backend engineering, cloud infrastructure, and application security</strong>. I'm interested in building systems that are not only functional and maintainable, but also reliable and trustworthy when handling user data.
+        </p>
+        <p>
+          My longer-term goal is to work at the intersection of software engineering, cloud infrastructure, and security—creating robust, reproducible backend services that power modern international applications.
+        </p>
+      </section>
+
+      <!-- Honest Skill Categorization -->
+      <section class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/40 p-6 space-y-4">
+        <h3 class="text-xs font-mono uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-semibold">
+          Current Distinction: Proven Experience vs. Growing Direction
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
+          <div class="p-4 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+            <span class="text-emerald-600 dark:text-emerald-400 font-bold block mb-1">
+              Proven Hands-on Experience
+            </span>
+            <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              Web application development with React, Angular, TypeScript, PostgreSQL, Supabase, MongoDB, Playwright E2E testing, Docker, and CI/CD with production client deployments.
+            </p>
+          </div>
+          <div class="p-4 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+            <span class="text-blue-600 dark:text-blue-400 font-bold block mb-1">
+              Active Growth & Future Focus
+            </span>
+            <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              Advanced backend system architecture, Linux cloud infrastructure, deep application security (authentication, defense-in-depth, RLS), and AI-assisted software engineering.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- AI-Assisted Development Disclosure -->
+      <section class="border-t border-zinc-200 dark:border-zinc-800 pt-8">
+        <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+            <h3 class="text-xs font-mono uppercase tracking-wider text-zinc-900 dark:text-zinc-100 font-semibold">
+              AI-Assisted Development Disclosure
+            </h3>
+          </div>
+          <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+            I use AI-assisted development tools to accelerate implementation, debugging, documentation, and exploration. I remain responsible for reviewing, testing, integrating, and validating the resulting software.
+          </p>
+          <p class="text-xs text-zinc-500 dark:text-zinc-400 font-mono mt-3">
+            Engineering judgment, security verification, and system reliability remain the human responsibility of the developer.
+          </p>
+        </div>
+      </section>
+
+      <!-- Next Actions -->
+      <div class="pt-4 flex flex-wrap items-center gap-3">
+        <Button href="/projects" variant="primary">
+          Explore My Projects
+        </Button>
+        <Button href="/contact" variant="outline">
+          Get in Touch
+        </Button>
+      </div>
+    </div>
+  </div>
+</Layout>
+

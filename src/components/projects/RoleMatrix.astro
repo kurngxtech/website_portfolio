@@ -1,0 +1,83 @@
+---
+export interface Props {
+  roles?: {
+    role: string;
+    description: string;
+    capabilities: string[];
+  }[];
+}
+
+const {
+  roles = [
+    {
+      role: 'Customer',
+      description: 'End-user ticketing flow for movie selection and ticket booking.',
+      capabilities: [
+        'Browse movie schedules and cinema locations',
+        'Select showtimes and screen halls',
+        'Book seats and verify reservations',
+      ],
+    },
+    {
+      role: 'Cinema Organizer',
+      description: 'Operational portal for managing films and hall scheduling.',
+      capabilities: [
+        'Manage movie listings and hall screenings [PLACEHOLDER]',
+        'Monitor seat allocations and availability [PLACEHOLDER]',
+        'Organize showtime catalogs [PLACEHOLDER]',
+      ],
+    },
+    {
+      role: 'Admin',
+      description: 'System-wide governance and operational oversight.',
+      capabilities: [
+        'User account and permission control [PLACEHOLDER]',
+        'System master data governance [PLACEHOLDER]',
+        'Platform activity and audit logs [PLACEHOLDER]',
+      ],
+    },
+  ],
+} = Astro.props;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+  {
+    roles.map((r, idx) => (
+      <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono text-blue-600 dark:text-blue-400 font-semibold">
+              ROLE 0{idx + 1}
+            </span>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+              Access Tier
+            </span>
+          </div>
+
+          <h4 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+            {r.role}
+          </h4>
+
+          <p class="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
+            {r.description}
+          </p>
+
+          <div class="pt-3 border-t border-zinc-100 dark:border-zinc-800">
+            <span class="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500 block mb-2 font-medium">
+              Key Capabilities
+            </span>
+            <ul class="space-y-1.5">
+              {r.capabilities.map((cap) => (
+                <li class="text-xs text-zinc-600 dark:text-zinc-400 flex items-start gap-1.5">
+                  <span class="text-blue-500 mt-0.5">•</span>
+                  <span>{cap}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</div>
+

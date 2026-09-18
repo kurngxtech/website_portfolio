@@ -1,0 +1,105 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<Layout
+  title="Experience | Bagus Kurniawan"
+  description="Professional software engineering and internship experience of Bagus Kurniawan."
+>
+  <div class="py-4 md:py-8 max-w-4xl mx-auto">
+    <SectionHeading
+      eyebrow="CAREER / EXPERIENCE"
+      title="Work Experience"
+      description="Professional roles and verified engineering contributions in production software environments."
+    />
+
+    <!-- Experience Timeline -->
+    <div class="relative border-l border-zinc-200 dark:border-zinc-800 ml-3 sm:ml-4 pl-6 sm:pl-8 space-y-12">
+      <!-- 2026: Software Development Intern -->
+      <div class="relative">
+        <!-- Timeline Marker -->
+        <span class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full border-2 border-blue-600 bg-white dark:bg-zinc-950" aria-hidden="true"></span>
+
+        <div class="flex flex-wrap items-center gap-2 mb-2">
+          <Badge variant="accent">Internship</Badge>
+          <Badge variant="success">Production Project</Badge>
+          <span class="text-xs font-mono text-zinc-400">2026</span>
+        </div>
+
+        <h3 class="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+          Software Development Intern
+        </h3>
+
+        <p class="text-sm font-mono text-blue-600 dark:text-blue-400 mt-1 mb-3">
+          [Company name — placeholder until provided] · Backend Developer
+        </p>
+
+        <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed mb-4">
+          Contributed to a production web platform as part of a two-person development team, with responsibilities spanning backend-oriented development, CMS functionality, authentication, database integration, security controls, testing, CI/CD, and production deployment.
+        </p>
+
+        <!-- Detailed responsibilities -->
+        <div class="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-5 mb-4">
+          <h4 class="text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold mb-3">
+            Core Production Deliverables
+          </h4>
+          <ul class="space-y-2 text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 font-mono">
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 font-bold">↳</span>
+              <span><strong>Custom CMS Architecture:</strong> Built backend workflows allowing administrators to manage public gallery content dynamically without direct database access.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 font-bold">↳</span>
+              <span><strong>PostgreSQL RLS Policies:</strong> Defined Row Level Security in Supabase to guarantee that unauthenticated API clients cannot execute arbitrary writes or data modifications.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 font-bold">↳</span>
+              <span><strong>Authentication & Route Security:</strong> Configured session tokens and admin guards preventing unauthenticated entry into operational pages.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-blue-500 font-bold">↳</span>
+              <span><strong>Testing & Automation:</strong> Wrote Playwright E2E tests and integrated them into GitHub Actions CI for continuous verification.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+          <div class="flex flex-wrap gap-1.5">
+            <Badge size="sm">React</Badge>
+            <Badge size="sm">TypeScript</Badge>
+            <Badge size="sm">Supabase</Badge>
+            <Badge size="sm">PostgreSQL</Badge>
+            <Badge size="sm">Playwright</Badge>
+            <Badge size="sm">Vercel</Badge>
+          </div>
+
+          <Button href="/projects/saint-ink-tattoo" variant="outline" size="sm">
+            Read Saint Ink Tattoo Case Study →
+          </Button>
+        </div>
+      </div>
+
+      <!-- Educational Context Note -->
+      <div class="relative">
+        <span class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full border-2 border-zinc-400 bg-white dark:bg-zinc-950" aria-hidden="true"></span>
+
+        <div class="flex items-center gap-2 mb-2">
+          <Badge variant="outline">Academic</Badge>
+          <span class="text-xs font-mono text-zinc-400">Current</span>
+        </div>
+
+        <h3 class="text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-100">
+          Information Systems / IT Degree Student
+        </h3>
+
+        <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">
+          Focusing on software engineering, database management, distributed systems, and application security. Actively preparing for full-time international and remote software engineering opportunities.
+        </p>
+      </div>
+    </div>
+  </div>
+</Layout>
+
