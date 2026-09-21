@@ -20,7 +20,7 @@ import { notes } from '../../data/notes';
       {
         notes.map((note, index) => (
           <article class="group relative rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 md:p-8 transition-all hover:border-zinc-300 dark:hover:border-zinc-700">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono mb-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-sans mb-3">
               <span class="text-blue-600 dark:text-blue-400 font-semibold">
                 0{index + 1} / {note.category}
               </span>
@@ -49,7 +49,7 @@ import { notes } from '../../data/notes';
                 ))}
               </div>
 
-              <span class="text-xs font-mono font-medium text-blue-600 dark:text-blue-400 group-hover:translate-x-0.5 transition-transform inline-flex items-center">
+              <span class="text-xs font-sans font-medium text-blue-600 dark:text-blue-400 group-hover:translate-x-0.5 transition-transform inline-flex items-center">
                 Read note <span class="ml-1" aria-hidden="true">→</span>
               </span>
             </div>

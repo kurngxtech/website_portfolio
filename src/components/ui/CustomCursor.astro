@@ -1,0 +1,166 @@
+---
+---
+
+<div
+  id="custom-cursor"
+  class="pointer-events-none fixed top-0 left-0 z-50 flex items-center justify-center rounded-full border border-blue-500/40 bg-blue-500/10 transition-opacity duration-300 opacity-0 hidden"
+  style="width: 26px; height: 26px; will-change: transform, width, height, opacity; transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);"
+  aria-hidden="true"
+>
+  <span
+    id="cursor-badge-text"
+    class="opacity-0 transition-opacity duration-150 text-[10px] font-sans font-semibold text-blue-600 dark:text-blue-300 tracking-wider whitespace-nowrap select-none"
+  >
+    VIEW ↗
+  </span>
+</div>
+
+<style>
+  /* Standard hover over link/button */
+  #custom-cursor.is-hovering {
+    width: 44px !important;
+    height: 44px !important;
+    border-color: rgba(37, 99, 235, 0.6);
+    background-color: rgba(37, 99, 235, 0.15);
+  }
+
+  /* Distinct state over Project Cards with 'VIEW ↗' pill */
+  #custom-cursor.is-project {
+    width: 80px !important;
+    height: 32px !important;
+    border-radius: 9999px !important;
+    border-color: rgba(37, 99, 235, 0.75);
+    background-color: rgba(37, 99, 235, 0.2);
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+  }
+
+  #custom-cursor.is-project #cursor-badge-text {
+    opacity: 1;
+  }
+
+  #custom-cursor.is-active {
+    scale: 0.9;
+  }
+
+  @media (max-width: 1023px), (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+    #custom-cursor {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  let cursorInitialized = false;
+  let rafId: number | null = null;
+
+  const initCursor = () => {
+    const isDesktopPointer = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 1024px)').matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!isDesktopPointer || prefersReducedMotion) {
+      return;
+    }
+
+    const cursor = document.getElementById('custom-cursor');
+    if (!cursor) return;
+
+    cursor.classList.remove('hidden');
+
+    let mouseX = -100;
+    let mouseY = -100;
+    let currentX = -100;
+    let currentY = -100;
+    let isVisible = false;
+
+    const lerp = (start: number, end: number, factor: number) => start + (end - start) * factor;
+
+    const render = () => {
+      currentX = lerp(currentX, mouseX, 0.22);
+      currentY = lerp(currentY, mouseY, 0.22);
+
+      // Hardware-accelerated transform running on GPU compositor
+      cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
+
+      // Only run when moving to save 100% CPU when stationary
+      if (Math.abs(currentX - mouseX) > 0.2 || Math.abs(currentY - mouseY) > 0.2) {
+        rafId = requestAnimationFrame(render);
+      } else {
+        rafId = null;
+      }
+    };
+
+    const wakeRenderer = () => {
+      if (rafId === null) {
+        rafId = requestAnimationFrame(render);
+      }
+    };
+
+    if (!cursorInitialized) {
+      cursorInitialized = true;
+
+      window.addEventListener(
+        'mousemove',
+        (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+
+          if (!isVisible) {
+            isVisible = true;
+            cursor.style.opacity = '1';
+          }
+          wakeRenderer();
+        },
+        { passive: true }
+      );
+
+      document.addEventListener('mouseleave', () => {
+        isVisible = false;
+        cursor.style.opacity = '0';
+      });
+
+      document.addEventListener('mouseenter', () => {
+        isVisible = true;
+        cursor.style.opacity = '1';
+      });
+
+      document.addEventListener('mousedown', () => cursor.classList.add('is-active'));
+      document.addEventListener('mouseup', () => cursor.classList.remove('is-active'));
+
+      // Delegate hover detection
+      document.addEventListener('mouseover', (e) => {
+        const target = e.target as HTMLElement | null;
+        if (!target) return;
+
+        const projectTarget = target.closest('[data-cursor="project"]');
+        if (projectTarget) {
+          cursor.classList.add('is-project');
+          cursor.classList.remove('is-hovering');
+          return;
+        }
+
+        const interactive = target.closest('a, button, input, textarea, select, [role="button"]');
+        if (interactive) {
+          cursor.classList.add('is-hovering');
+          cursor.classList.remove('is-project');
+        }
+      });
+
+      document.addEventListener('mouseout', (e) => {
+        const target = e.target as HTMLElement | null;
+        if (!target) return;
+
+        const projectTarget = target.closest('[data-cursor="project"]');
+        if (projectTarget) {
+          cursor.classList.remove('is-project');
+        }
+
+        const interactive = target.closest('a, button, input, textarea, select, [role="button"]');
+        if (interactive) {
+          cursor.classList.remove('is-hovering');
+        }
+      });
+    }
+  };
+
+  initCursor();
+</script>

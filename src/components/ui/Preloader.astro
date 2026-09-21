@@ -1,0 +1,142 @@
+---
+---
+
+<div
+  id="system-preloader"
+  class="fixed inset-0 z-[100] flex flex-col justify-between p-6 sm:p-12 bg-zinc-950 text-zinc-100 select-none"
+  style="will-change: transform; transform: translate3d(0, 0, 0);"
+  aria-hidden="true"
+>
+  <!-- Top Metadata -->
+  <div class="flex items-center justify-between text-xs font-mono text-zinc-500">
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+      <span class="tracking-wider uppercase">kurngxtech // system.init</span>
+    </div>
+    <span class="text-zinc-600">v2026.04</span>
+  </div>
+
+  <!-- Center Counter -->
+  <div class="flex flex-col items-center justify-center my-auto">
+    <div
+      id="preloader-counter"
+      class="text-6xl sm:text-8xl md:text-9xl font-mono font-bold tracking-tighter tabular-nums text-zinc-100"
+    >
+      0%
+    </div>
+    
+    <div class="w-48 sm:w-64 h-1 bg-zinc-900 rounded-full overflow-hidden mt-6">
+      <div
+        id="preloader-bar"
+        class="h-full bg-blue-500 w-full origin-left"
+        style="transform: scaleX(0); will-change: transform;"
+      ></div>
+    </div>
+  </div>
+
+  <!-- Bottom Status -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between text-xs font-mono text-zinc-500 gap-2">
+    <span id="preloader-status" class="tracking-wider uppercase">
+      INITIALIZING RUNTIME...
+    </span>
+    <span>BAGUS KURNIAWAN · PORTFOLIO</span>
+  </div>
+</div>
+
+<script>
+  declare global {
+    interface Window {
+      __kurngx_initial_loaded?: boolean;
+    }
+  }
+
+  const runPreloader = () => {
+    const preloader = document.getElementById('system-preloader');
+    const counter = document.getElementById('preloader-counter');
+    const bar = document.getElementById('preloader-bar');
+    const status = document.getElementById('preloader-status');
+
+    if (!preloader || !counter || !bar || !status) return;
+
+    const finish = () => {
+      window.__kurngx_initial_loaded = true;
+      preloader.style.display = 'none';
+      window.dispatchEvent(new CustomEvent('kurngx:ready'));
+    };
+
+    // Check reduced motion or if already loaded during client-side navigation
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion || window.__kurngx_initial_loaded) {
+      finish();
+      return;
+    }
+
+    // Reset clean initial state
+    preloader.style.display = 'flex';
+    preloader.style.transform = 'translate3d(0, 0, 0)';
+    preloader.style.opacity = '1';
+    bar.style.transform = 'scaleX(0)';
+    counter.textContent = '0%';
+    status.textContent = 'INITIALIZING RUNTIME...';
+
+    const duration = 850; // Snappy & responsive duration (ms)
+    const startTime = performance.now();
+
+    const update = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(1, elapsed / duration);
+      
+      // Fluid ease-in-out curve
+      const eased = progress < 0.5
+        ? 2 * progress * progress
+        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+      const percent = Math.round(eased * 100);
+      counter.textContent = `${percent}%`;
+      bar.style.transform = `scaleX(${eased})`;
+
+      if (percent < 25) {
+        status.textContent = 'INITIALIZING RUNTIME...';
+      } else if (percent < 55) {
+        status.textContent = 'COMPOSING UI ARCHITECTURE...';
+      } else if (percent < 85) {
+        status.textContent = 'VERIFYING SECURITY RULES...';
+      } else {
+        status.textContent = 'SYSTEM READY';
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        counter.textContent = '100%';
+        bar.style.transform = 'scaleX(1)';
+        status.textContent = 'SYSTEM READY';
+
+        // Brief delay at 100% then hardware-accelerated slide up
+        setTimeout(() => {
+          preloader.style.transition = 'transform 0.5s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.5s ease';
+          preloader.style.transform = 'translate3d(0, -100%, 0)';
+          preloader.style.opacity = '0.98';
+
+          setTimeout(finish, 520);
+        }, 120);
+      }
+    };
+
+    requestAnimationFrame(update);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runPreloader);
+  } else {
+    runPreloader();
+  }
+
+  // Ensure preloader stays hidden on internal ClientRouter transitions
+  document.addEventListener('astro:after-swap', () => {
+    const preloader = document.getElementById('system-preloader');
+    if (preloader) {
+      preloader.style.display = 'none';
+    }
+  });
+</script>

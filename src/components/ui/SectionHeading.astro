@@ -1,31 +1,72 @@
 ---
+import { t, type TranslationKey } from '../../i18n/translations';
+
 export interface Props {
   eyebrow?: string;
-  title: string;
+  eyebrowId?: string;
+  eyebrowKey?: TranslationKey | string;
+  title?: string;
+  titleId?: string;
+  titleKey?: TranslationKey | string;
   description?: string;
+  descriptionId?: string;
+  descKey?: TranslationKey | string;
   class?: string;
 }
 
-const { eyebrow, title, description, class: className = '' } = Astro.props;
+const {
+  eyebrow,
+  eyebrowId,
+  eyebrowKey,
+  title = '',
+  titleId,
+  titleKey,
+  description,
+  descriptionId,
+  descKey,
+  class: className = '',
+} = Astro.props;
+
+const displayEyebrow = eyebrowKey ? t(eyebrowKey as TranslationKey) : (eyebrow || '');
+const displayTitle = titleKey ? t(titleKey as TranslationKey) : (title || '');
+const displayDescription = descKey ? t(descKey as TranslationKey) : (description || '');
 ---
 
 <div class:list={['mb-8 md:mb-12', className]}>
   {
-    eyebrow && (
-      <span class="block font-mono text-xs text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-2 font-medium">
-        {eyebrow}
+    displayEyebrow && (
+      <span
+        data-i18n-key={eyebrowKey}
+        data-i18n-en={eyebrow}
+        data-i18n-id={eyebrowId || eyebrow}
+        class="block font-sans text-xs text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-2 font-semibold"
+      >
+        {displayEyebrow}
       </span>
     )
   }
-  <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
-    {title}
-  </h2>
   {
-    description && (
-      <p class="mt-2 text-sm md:text-base text-zinc-600 dark:text-zinc-400 max-w-2xl">
-        {description}
+    displayTitle && (
+      <h2
+        data-i18n-key={titleKey}
+        data-i18n-en={title}
+        data-i18n-id={titleId || title}
+        class="text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50"
+      >
+        {displayTitle}
+      </h2>
+    )
+  }
+  {
+    displayDescription && (
+      <p
+        data-i18n-key={descKey}
+        data-i18n-en={description}
+        data-i18n-id={descriptionId || description}
+        class="mt-2 text-sm md:text-base text-zinc-600 dark:text-zinc-400 max-w-2xl"
+      >
+        {displayDescription}
       </p>
     )
   }
 </div>
-

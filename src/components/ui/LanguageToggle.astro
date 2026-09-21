@@ -1,0 +1,104 @@
+---
+---
+
+<button
+  id="language-toggle"
+  type="button"
+  aria-label="Toggle language (English / Bahasa Indonesia)"
+  class="relative inline-flex items-center gap-1 px-2.5 py-1 text-xs font-sans font-semibold rounded-full border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/80 dark:bg-zinc-800/60 hover:bg-zinc-200/80 dark:hover:bg-zinc-700/80 text-zinc-700 dark:text-zinc-300 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+>
+  <span id="lang-indicator-en" class="font-bold text-blue-600 dark:text-blue-400">EN</span>
+  <span class="text-zinc-300 dark:text-zinc-600 text-[10px]">/</span>
+  <span id="lang-indicator-id" class="text-zinc-500 dark:text-zinc-400">ID</span>
+</button>
+
+<script>
+  import { getTranslation, type Language } from '../../i18n/translations';
+
+  function updateLanguageUI(lang: string) {
+    const validLang: Language = lang === 'id' ? 'id' : 'en';
+    const enIndicator = document.getElementById('lang-indicator-en');
+    const idIndicator = document.getElementById('lang-indicator-id');
+
+    if (validLang === 'id') {
+      enIndicator?.classList.remove('font-bold', 'text-blue-600', 'dark:text-blue-400');
+      enIndicator?.classList.add('text-zinc-500', 'dark:text-zinc-400');
+      idIndicator?.classList.remove('text-zinc-500', 'dark:text-zinc-400');
+      idIndicator?.classList.add('font-bold', 'text-blue-600', 'dark:text-blue-400');
+      document.documentElement.lang = 'id';
+      document.documentElement.setAttribute('data-lang', 'id');
+    } else {
+      idIndicator?.classList.remove('font-bold', 'text-blue-600', 'dark:text-blue-400');
+      idIndicator?.classList.add('text-zinc-500', 'dark:text-zinc-400');
+      enIndicator?.classList.remove('text-zinc-500', 'dark:text-zinc-400');
+      enIndicator?.classList.add('font-bold', 'text-blue-600', 'dark:text-blue-400');
+      document.documentElement.lang = 'en';
+      document.documentElement.setAttribute('data-lang', 'en');
+    }
+
+    // 1. Update elements with centralized dictionary key [data-i18n-key]
+    const keyElements = document.querySelectorAll<HTMLElement>('[data-i18n-key]');
+    keyElements.forEach((el) => {
+      const key = el.getAttribute('data-i18n-key');
+      if (!key) return;
+      const text = getTranslation(key, validLang);
+      if (text === null) return;
+
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        (el as HTMLInputElement).placeholder = text;
+      } else {
+        el.innerHTML = text;
+      }
+    });
+
+    // 2. Fallback update for elements with legacy data-i18n-en / data-i18n-id without a central key
+    const legacyElements = document.querySelectorAll<HTMLElement>('[data-i18n-en]:not([data-i18n-key])');
+    legacyElements.forEach((el) => {
+      const textEn = el.getAttribute('data-i18n-en');
+      const textId = el.getAttribute('data-i18n-id');
+      const targetText = validLang === 'id' && textId ? textId : textEn;
+      if (!targetText) return;
+
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        (el as HTMLInputElement).placeholder = targetText;
+      } else {
+        el.innerHTML = targetText;
+      }
+    });
+
+    // 3. Dispatch global event for interactive components (e.g., typewriter)
+    window.dispatchEvent(new CustomEvent('kurngx:lang-change', { detail: { lang: validLang } }));
+  }
+
+  function initLanguage() {
+    const savedLang = localStorage.getItem('portfolio_lang');
+    if (savedLang === 'id') {
+      updateLanguageUI('id');
+    }
+  }
+
+  // Expose global helpers for cross-component access
+  (window as any).kurngxUpdateLanguage = updateLanguageUI;
+  (window as any).kurngxGetLanguage = () => localStorage.getItem('portfolio_lang') || 'en';
+
+  // Ensure click listener is registered once at document level
+  if (!(window as any).__lang_listener_attached) {
+    (window as any).__lang_listener_attached = true;
+
+    document.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement)?.closest('#language-toggle');
+      if (!btn) return;
+
+      const currentLang = localStorage.getItem('portfolio_lang') || 'en';
+      const newLang = currentLang === 'en' ? 'id' : 'en';
+      localStorage.setItem('portfolio_lang', newLang);
+      updateLanguageUI(newLang);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLanguage);
+  } else {
+    initLanguage();
+  }
+</script>

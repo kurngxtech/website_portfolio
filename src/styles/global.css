@@ -1,27 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+   --font-display: 'Anton', 'Plus Jakarta Sans', sans-serif;
    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
    --color-primary: #2563EB;
 }
 
 :root {
-   --color-bg-base: #fafafa;
+   --color-bg-base: #fcfcfc;
    --color-surface: #ffffff;
    --color-border: #e4e4e7;
+   --color-border-subtle: rgba(228, 228, 231, 0.6);
    --color-text-main: #18181b;
    --color-text-muted: #71717a;
    --color-accent: #2563eb;
+   --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html.dark {
    --color-bg-base: #09090b;
-   --color-surface: #121215;
+   --color-surface: #111114;
    --color-border: #27272a;
+   --color-border-subtle: rgba(39, 39, 42, 0.5);
    --color-text-main: #f4f4f5;
    --color-text-muted: #a1a1aa;
    --color-accent: #3b82f6;
@@ -30,6 +33,12 @@ html.dark {
 html {
    scroll-behavior: smooth;
    font-family: var(--font-sans);
+   letter-spacing: -0.015em;
+}
+
+.font-display {
+   font-family: var(--font-display);
+   letter-spacing: 0.03em;
 }
 
 body {
@@ -47,7 +56,318 @@ body {
    outline-offset: 2px;
 }
 
-/* Respect reduced motion preference */
+/* ==========================================================================
+   Modern Glassmorphism & Soft Surface Utilities with Subtle Background Shadow
+   ========================================================================== */
+.glass-panel {
+   background: rgba(255, 255, 255, 0.85);
+   backdrop-filter: blur(16px);
+   -webkit-backdrop-filter: blur(16px);
+   border: 1px solid rgba(228, 228, 231, 0.8);
+   box-shadow: 0 4px 20px -2px rgba(24, 24, 27, 0.05), 0 2px 6px -1px rgba(24, 24, 27, 0.02);
+}
+
+html.dark .glass-panel {
+   background: rgba(18, 18, 21, 0.8);
+   border: 1px solid rgba(39, 39, 42, 0.7);
+   box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.45), 0 2px 8px -1px rgba(0, 0, 0, 0.25);
+}
+
+.glass-card {
+   background: rgba(255, 255, 255, 0.75);
+   backdrop-filter: blur(12px);
+   -webkit-backdrop-filter: blur(12px);
+   border: 1px solid rgba(228, 228, 231, 0.7);
+   box-shadow: 0 4px 20px -2px rgba(24, 24, 27, 0.05), 0 2px 6px -1px rgba(24, 24, 27, 0.02);
+   transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 260ms ease,
+      box-shadow 260ms ease,
+      background-color 260ms ease;
+}
+
+.glass-card:hover {
+   box-shadow: 0 10px 30px -4px rgba(24, 24, 27, 0.08), 0 4px 10px -2px rgba(24, 24, 27, 0.04);
+}
+
+html.dark .glass-card {
+   background: rgba(18, 18, 21, 0.65);
+   border: 1px solid rgba(39, 39, 42, 0.5);
+   box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.45), 0 2px 8px -1px rgba(0, 0, 0, 0.25);
+}
+
+html.dark .glass-card:hover {
+   box-shadow: 0 10px 32px -4px rgba(0, 0, 0, 0.6), 0 4px 12px -2px rgba(37, 99, 235, 0.08);
+}
+
+/* ==========================================================================
+   Universal Subtle Card Background Shadows (Across all routes & sections)
+   ========================================================================== */
+article.rounded-xl,
+article.rounded-2xl,
+div.rounded-xl.border,
+div.rounded-2xl.border,
+section.rounded-xl.border,
+div.rounded-lg.border {
+   box-shadow: 0 4px 20px -2px rgba(24, 24, 27, 0.05), 0 2px 6px -1px rgba(24, 24, 27, 0.02);
+   transition: box-shadow 260ms ease, border-color 260ms ease, transform 260ms ease;
+}
+
+article.rounded-xl:hover,
+article.rounded-2xl:hover,
+div.rounded-xl.border:hover,
+div.rounded-2xl.border:hover {
+   box-shadow: 0 10px 30px -4px rgba(24, 24, 27, 0.08), 0 4px 10px -2px rgba(24, 24, 27, 0.04);
+}
+
+html.dark article.rounded-xl,
+html.dark article.rounded-2xl,
+html.dark div.rounded-xl.border,
+html.dark div.rounded-2xl.border,
+html.dark section.rounded-xl.border,
+html.dark div.rounded-lg.border {
+   box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.45), 0 2px 8px -1px rgba(0, 0, 0, 0.25);
+}
+
+html.dark article.rounded-xl:hover,
+html.dark article.rounded-2xl:hover,
+html.dark div.rounded-xl.border:hover,
+html.dark div.rounded-2xl.border:hover {
+   box-shadow: 0 10px 32px -4px rgba(0, 0, 0, 0.6), 0 4px 12px -2px rgba(37, 99, 235, 0.08);
+}
+
+/* ==========================================================================
+   Astro View Transitions Tuning
+   ========================================================================== */
+::view-transition-old(root) {
+   animation: 250ms cubic-bezier(0.16, 1, 0.3, 1) both fadeOut;
+}
+
+::view-transition-new(root) {
+   animation: 280ms cubic-bezier(0.16, 1, 0.3, 1) both fadeIn;
+}
+
+@keyframes fadeOut {
+   from {
+      opacity: 1;
+      transform: translateY(0px);
+   }
+
+   to {
+      opacity: 0;
+      transform: translateY(-4px);
+   }
+}
+
+@keyframes fadeIn {
+   from {
+      opacity: 0;
+      transform: translateY(6px);
+   }
+
+   to {
+      opacity: 1;
+      transform: translateY(0px);
+   }
+}
+
+/* ==========================================================================
+   Smooth Color Morphing for Layout Containers
+   ========================================================================== */
+body,
+header,
+main,
+footer {
+   transition: color 260ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 260ms cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+section[id] {
+   scroll-margin-top: 5.5rem;
+}
+
+/* ==========================================================================
+   Editorial Masked Typography
+   ========================================================================== */
+.line-mask {
+   overflow: hidden;
+   display: inline-block;
+   vertical-align: top;
+   line-height: 1.15;
+}
+
+.line-reveal {
+   display: block;
+   transform: translateY(105%);
+   transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+   will-change: transform;
+}
+
+.line-reveal.is-revealed {
+   transform: translateY(0%);
+}
+
+/* ==========================================================================
+   Animation & Micro-Interaction Tokens (GPU-composited)
+   ========================================================================== */
+.animate-fade-up {
+   opacity: 0;
+   animation: fadeUpEntrance 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+   will-change: opacity, transform;
+}
+
+@keyframes fadeUpEntrance {
+   0% {
+      opacity: 0;
+      transform: translateY(12px);
+   }
+
+   100% {
+      opacity: 1;
+      transform: translateY(0);
+   }
+}
+
+.reveal-on-scroll {
+   opacity: 0;
+   transform: translateY(14px);
+   transition: opacity 350ms cubic-bezier(0.16, 1, 0.3, 1), transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+   will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+   opacity: 1;
+   transform: translateY(0);
+}
+
+.delay-100 {
+   transition-delay: 50ms;
+}
+
+.delay-200 {
+   transition-delay: 100ms;
+}
+
+.delay-300 {
+   transition-delay: 150ms;
+}
+
+.delay-400 {
+   transition-delay: 200ms;
+}
+
+.delay-500 {
+   transition-delay: 250ms;
+}
+
+.transition-card {
+   transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 260ms ease,
+      box-shadow 260ms ease,
+      background-color 260ms ease;
+   will-change: transform, box-shadow;
+}
+
+.transition-button {
+   transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 150ms ease,
+      border-color 150ms ease,
+      box-shadow 150ms ease;
+}
+
+/* ==========================================================================
+   Hardware-Accelerated Scroll Progress Indicator (Native CSS Scroll Timeline)
+   ========================================================================== */
+@keyframes scroll-progress-bar {
+   from {
+      transform: scaleX(0);
+   }
+
+   to {
+      transform: scaleX(1);
+   }
+}
+
+#scroll-progress {
+   transform-origin: 0% 50%;
+   will-change: transform;
+   animation: scroll-progress-bar auto linear;
+   animation-timeline: scroll();
+}
+
+/* ==========================================================================
+   Compositor-Driven Infinite Horizontal Marquee
+   ========================================================================== */
+@keyframes carousel-marquee {
+   from {
+      transform: translate3d(0, 0, 0);
+   }
+
+   to {
+      transform: translate3d(-50%, 0, 0);
+   }
+}
+
+.carousel-marquee-track {
+   display: flex;
+   width: max-content;
+   will-change: transform;
+   animation: carousel-marquee 40s linear infinite;
+}
+
+.carousel-marquee-track:hover,
+.carousel-marquee-track.is-paused {
+   animation-play-state: paused;
+}
+
+/* ==========================================================================
+   Hero Entrance Animation
+   ========================================================================== */
+@keyframes hero-fade-in {
+   from {
+      opacity: 0;
+      transform: translateY(10px);
+   }
+
+   to {
+      opacity: 1;
+      transform: translateY(0);
+   }
+}
+
+.hero-fade-in {
+   animation: hero-fade-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ==========================================================================
+   Project Carousel Edge Masking Overlays (Smooth Multi-Stop Deep Vignette)
+   ========================================================================== */
+.carousel-mask-left {
+   background: linear-gradient(to right,
+         var(--color-bg-base) 0%,
+         color-mix(in srgb, var(--color-bg-base) 98%, transparent) 15%,
+         color-mix(in srgb, var(--color-bg-base) 88%, transparent) 30%,
+         color-mix(in srgb, var(--color-bg-base) 70%, transparent) 50%,
+         color-mix(in srgb, var(--color-bg-base) 45%, transparent) 70%,
+         color-mix(in srgb, var(--color-bg-base) 18%, transparent) 85%,
+         transparent 100%);
+}
+
+.carousel-mask-right {
+   background: linear-gradient(to left,
+         var(--color-bg-base) 0%,
+         color-mix(in srgb, var(--color-bg-base) 98%, transparent) 15%,
+         color-mix(in srgb, var(--color-bg-base) 88%, transparent) 30%,
+         color-mix(in srgb, var(--color-bg-base) 70%, transparent) 50%,
+         color-mix(in srgb, var(--color-bg-base) 45%, transparent) 70%,
+         color-mix(in srgb, var(--color-bg-base) 18%, transparent) 85%,
+         transparent 100%);
+}
+
+
+/* ==========================================================================
+   Respect Reduced Motion Preference
+   ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
 
    *,
@@ -57,5 +377,27 @@ body {
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
+   }
+
+   ::view-transition-old(root),
+   ::view-transition-new(root) {
+      animation: none !important;
+   }
+
+   .reveal-on-scroll {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+   }
+
+   .animate-fade-up {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+   }
+
+   .line-reveal {
+      transform: none !important;
+      transition: none !important;
    }
 }

@@ -14,13 +14,13 @@ import { skillsData } from '../data/projects';
     <!-- Header with Action -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-6 mb-8">
       <div>
-        <span class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold block mb-1">
+        <span class="text-xs font-sans uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold block mb-1">
           CURRICULUM VITAE
         </span>
         <h1 class="text-3xl font-bold text-zinc-900 dark:text-zinc-50">
           Bagus Kurniawan
         </h1>
-        <p class="text-sm font-mono text-zinc-600 dark:text-zinc-400 mt-1">
+        <p class="text-sm font-sans font-medium text-zinc-600 dark:text-zinc-400 mt-1">
           Software Engineer · Backend & Cloud Focus
         </p>
       </div>
@@ -38,7 +38,7 @@ import { skillsData } from '../data/projects';
     <div class="space-y-8 text-zinc-700 dark:text-zinc-300 leading-relaxed text-sm">
       <!-- Summary -->
       <section>
-        <h2 class="text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold mb-2">
+        <h2 class="text-xs font-sans uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold mb-2">
           Professional Summary
         </h2>
         <p class="text-sm sm:text-base text-zinc-800 dark:text-zinc-200 leading-relaxed">
@@ -48,7 +48,7 @@ import { skillsData } from '../data/projects';
 
       <!-- Experience -->
       <section class="border-t border-zinc-100 dark:border-zinc-800 pt-6">
-        <h2 class="text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold mb-4">
+        <h2 class="text-xs font-sans uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold mb-4">
           Experience
         </h2>
 
@@ -58,9 +58,9 @@ import { skillsData } from '../data/projects';
               <h3 class="text-base font-semibold text-zinc-900 dark:text-zinc-100">
                 Software Development Intern (Backend Developer)
               </h3>
-              <span class="text-xs font-mono text-zinc-400">2026</span>
+              <span class="text-xs font-sans font-medium text-zinc-400">2026</span>
             </div>
-            <p class="text-xs font-mono text-blue-600 dark:text-blue-400 mb-2">
+            <p class="text-xs font-sans font-medium text-blue-600 dark:text-blue-400 mb-2">
               [Company Name — Placeholder] · Saint Ink Tattoo Production Platform
             </p>
             <ul class="list-disc pl-5 space-y-1 text-xs sm:text-sm text-zinc-600 dark:text-zinc-300">
@@ -76,7 +76,7 @@ import { skillsData } from '../data/projects';
 
       <!-- Education -->
       <section class="border-t border-zinc-100 dark:border-zinc-800 pt-6">
-        <h2 class="text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold mb-3">
+        <h2 class="text-xs font-sans uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold mb-3">
           Education
         </h2>
         <div class="p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60">
@@ -84,9 +84,9 @@ import { skillsData } from '../data/projects';
             <h3 class="text-base font-semibold text-zinc-900 dark:text-zinc-100">
               Bachelor's Degree in Information Systems / IT
             </h3>
-            <span class="text-xs font-mono text-zinc-400">In Progress</span>
+            <span class="text-xs font-sans font-medium text-zinc-400">In Progress</span>
           </div>
-          <p class="text-xs font-mono text-zinc-500 dark:text-zinc-400 mt-1">
+          <p class="text-xs font-sans text-zinc-500 dark:text-zinc-400 mt-1">
             [University Name — Placeholder until provided] · Indonesia
           </p>
         </div>
@@ -94,30 +94,30 @@ import { skillsData } from '../data/projects';
 
       <!-- Technical Skills -->
       <section class="border-t border-zinc-100 dark:border-zinc-800 pt-6">
-        <h2 class="text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold mb-3">
+        <h2 class="text-xs font-sans uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold mb-3">
           Technical Competencies
         </h2>
-        <div class="space-y-3 text-xs font-mono">
+        <div class="space-y-3 text-xs font-sans">
           <div>
-            <span class="text-zinc-400 block mb-1">Languages:</span>
+            <span class="text-zinc-400 block mb-1 font-medium">Languages:</span>
             <span class="text-zinc-800 dark:text-zinc-200 font-medium">
               {skillsData.languages.join(' · ')}
             </span>
           </div>
           <div>
-            <span class="text-zinc-400 block mb-1">Frontend:</span>
+            <span class="text-zinc-400 block mb-1 font-medium">Frontend:</span>
             <span class="text-zinc-800 dark:text-zinc-200 font-medium">
               {skillsData.frontend.join(' · ')}
             </span>
           </div>
           <div>
-            <span class="text-zinc-400 block mb-1">Backend & Databases:</span>
+            <span class="text-zinc-400 block mb-1 font-medium">Backend & Databases:</span>
             <span class="text-zinc-800 dark:text-zinc-200 font-medium">
               {[...skillsData.backend, ...skillsData.databases].join(' · ')}
             </span>
           </div>
           <div>
-            <span class="text-zinc-400 block mb-1">Testing & DevOps:</span>
+            <span class="text-zinc-400 block mb-1 font-medium">Testing & DevOps:</span>
             <span class="text-zinc-800 dark:text-zinc-200 font-medium">
               {[...skillsData.testing, ...skillsData.devops].join(' · ')}
             </span>
@@ -127,7 +127,7 @@ import { skillsData } from '../data/projects';
 
       <!-- Key Projects -->
       <section class="border-t border-zinc-100 dark:border-zinc-800 pt-6">
-        <h2 class="text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold mb-3">
+        <h2 class="text-xs font-sans uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold mb-3">
           Verified Projects
         </h2>
         <div class="space-y-3 text-xs sm:text-sm">

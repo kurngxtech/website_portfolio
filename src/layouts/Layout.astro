@@ -3,6 +3,9 @@ import '../styles/global.css';
 import Navbar from '../components/layout/Navbar.astro';
 import Footer from '../components/layout/Footer.astro';
 import SEO from '../components/ui/SEO.astro';
+import CustomCursor from '../components/ui/CustomCursor.astro';
+import ThemeRipple from '../components/ui/ThemeRipple.astro';
+import Preloader from '../components/ui/Preloader.astro';
 
 export interface Props {
   title?: string;
@@ -18,42 +21,91 @@ const { title, description, article } = Astro.props;
   <head>
     <SEO title={title} description={description} article={article} />
 
-    <!-- Inline Script to prevent Theme FOUC -->
-    <script is:inline>
-      (() => {
-        const theme = (() => {
-          if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-            return localStorage.getItem('theme');
-          }
-          if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            return 'dark';
-          }
-          return 'light';
-        })();
+    <!-- Performance: DNS Prefetch & Font Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-        if (theme === 'dark') {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
-      })();
+    <!-- Non-Blocking Modern Typography (Plus Jakarta Sans) -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    />
+
+    <!-- Preload Critical LCP Hero Portrait Image -->
+    <link
+      rel="preload"
+      as="image"
+      href="/images/portrait-placeholder.svg"
+      type="image/svg+xml"
+      fetchpriority="high"
+    />
+
+    <!-- Inline Script to prevent Theme and Language FOUC -->
+    <script is:inline>
+      function applyThemeAndLanguage() {
+        try {
+          const savedTheme = typeof localStorage !== 'undefined' ? localStorage.getItem('theme') : null;
+          const isDark = savedTheme !== null ? savedTheme === 'dark' : true;
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+
+          const savedLang = typeof localStorage !== 'undefined' ? localStorage.getItem('portfolio_lang') : null;
+          if (savedLang === 'id') {
+            document.documentElement.lang = 'id';
+            document.documentElement.setAttribute('data-lang', 'id');
+          } else {
+            document.documentElement.lang = 'en';
+            document.documentElement.setAttribute('data-lang', 'en');
+          }
+        } catch (e) {}
+      }
+      applyThemeAndLanguage();
     </script>
   </head>
-  <body class="min-h-screen flex flex-col bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 selection:bg-blue-500/20 selection:text-blue-600 dark:selection:text-blue-400">
+  <body class="min-h-screen flex flex-col overflow-x-hidden bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 selection:bg-blue-500/20 selection:text-blue-600 dark:selection:text-blue-400">
+    <!-- Fullscreen System Preloader -->
+    <Preloader />
+
+    <!-- Ultra-Thin Top Scroll Progress Bar (Native CSS Scroll Timeline) -->
+    <div
+      id="scroll-progress"
+      class="fixed top-0 left-0 right-0 h-[2px] bg-blue-600 dark:bg-blue-500 z-[60] origin-left scale-x-0"
+      aria-hidden="true"
+    ></div>
+
     <!-- Accessibility Skip Link -->
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-blue-600 text-white rounded-md font-mono text-xs shadow-lg"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-blue-600 text-white rounded-md font-sans font-medium text-xs shadow-lg"
     >
       Skip to content
     </a>
 
     <Navbar />
 
-    <main id="main-content" class="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 focus:outline-none">
+    <main id="main-content" class="relative z-10 flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-24 pb-12 focus:outline-none">
       <slot />
     </main>
 
-    <Footer />
+    <div class="relative z-10">
+      <Footer />
+    </div>
+
+    <!-- Desktop-Only Custom Secondary Cursor with VIEW mode -->
+    <CustomCursor />
+
+    <!-- Water Droplet Theme Ripple Transition Overlay -->
+    <ThemeRipple />
+
+    <!-- Hardware-Accelerated Scroll Reveals Engine (Native IntersectionObserver) -->
+    <script src="../scripts/scrollAnimations.ts"></script>
   </body>
 </html>

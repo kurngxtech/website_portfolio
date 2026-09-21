@@ -1,72 +1,73 @@
 ---
 import ThemeToggle from '../ui/ThemeToggle.astro';
+import LanguageToggle from '../ui/LanguageToggle.astro';
+import { t, type TranslationKey } from '../../i18n/translations';
 
-const currentPath = Astro.url.pathname;
+interface NavLink {
+  href: string;
+  key: TranslationKey;
+  id: string;
+}
 
-const navLinks = [
-  { href: '/projects', label: 'Work' },
-  { href: '/experience', label: 'Experience' },
-  { href: '/about', label: 'About' },
-  { href: '/notes', label: 'Notes' },
-  { href: '/contact', label: 'Contact' },
+const navLinks: NavLink[] = [
+  { href: '#about', key: 'nav.about', id: 'about' },
+  { href: '#projects', key: 'nav.work', id: 'projects' },
+  { href: '#experience', key: 'nav.experience', id: 'experience' },
+  { href: '#skills', key: 'nav.skills', id: 'skills' },
+  { href: '#contact', key: 'nav.contact', id: 'contact' },
 ];
-
-const isActive = (path: string) => {
-  if (path === '/') return currentPath === '/';
-  return currentPath.startsWith(path);
-};
 ---
 
-<header class="sticky top-0 z-50 w-full border-b border-zinc-200/80 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md transition-colors">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<!-- Floating Pill Navbar -->
+<header class="fixed top-3 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-4xl rounded-full border border-zinc-200/80 dark:border-zinc-800/80 bg-white/85 dark:bg-zinc-900/85 backdrop-blur-md shadow-lg shadow-zinc-900/5 dark:shadow-black/40 px-3 sm:px-4 py-2 transition-all">
+  <div class="flex items-center justify-between gap-2">
     <!-- Brand / Name -->
     <a
-      href="/"
-      class="group flex items-center gap-2.5 font-mono text-sm font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+      href="#hero"
+      class="group flex items-center gap-2 font-sans text-xs sm:text-sm font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors pl-1"
     >
       <span class="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-500 group-hover:scale-125 transition-transform" aria-hidden="true"></span>
-      <span>kurngxtech</span>
-      <span class="hidden sm:inline text-xs text-zinc-400 dark:text-zinc-500 font-normal">/ bagus kurniawan</span>
+      <span data-i18n-key="nav.brand">{t('nav.brand')}</span>
     </a>
 
-    <!-- Desktop Navigation -->
-    <nav class="hidden md:flex items-center gap-1" aria-label="Main Navigation">
+    <!-- Desktop Navigation Links with ScrollSpy Highlighting -->
+    <nav class="hidden md:flex items-center gap-1" aria-label="Single Page Navigation">
       {
         navLinks.map((link) => (
           <a
             href={link.href}
-            class:list={[
-              'px-3 py-1.5 text-xs font-mono font-medium rounded-md transition-colors',
-              isActive(link.href)
-                ? 'text-blue-600 dark:text-blue-400 bg-blue-50/80 dark:bg-blue-950/40'
-                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60',
-            ]}
-            aria-current={isActive(link.href) ? 'page' : undefined}
+            data-nav-id={link.id}
+            data-i18n-key={link.key}
+            class="nav-anchor-link px-3 py-1 text-xs font-sans font-medium rounded-full transition-all duration-200 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60"
           >
-            {link.label}
+            {t(link.key)}
           </a>
         ))
       }
     </nav>
 
-    <!-- Actions: Theme Toggle, Resume & Mobile Menu Button -->
-    <div class="flex items-center gap-2">
+    <!-- Actions: CV, Language Toggle & Theme Toggle -->
+    <div class="flex items-center gap-1.5 sm:gap-2">
       <a
-        href="/resume"
-        class="hidden sm:inline-flex items-center px-2.5 py-1 text-xs font-mono font-medium border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+        href="#experience"
+        class="hidden sm:inline-flex items-center px-2.5 py-1 text-xs font-sans font-medium border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
       >
-        CV
+        <span data-i18n-key="nav.cv">{t('nav.cv')}</span>
       </a>
 
+      <!-- Bilingual EN / ID Switcher -->
+      <LanguageToggle />
+
+      <!-- Theme Switcher -->
       <ThemeToggle />
 
       <!-- Mobile Hamburger Button -->
       <button
         id="mobile-menu-button"
         type="button"
-        aria-label="Toggle navigation menu"
+        aria-label={t('nav.menu_toggle')}
         aria-expanded="false"
-        class="md:hidden p-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+        class="md:hidden p-1.5 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
       >
         <svg
           id="menu-icon-open"
@@ -95,46 +96,119 @@ const isActive = (path: string) => {
   <!-- Mobile Dropdown Menu -->
   <div
     id="mobile-menu"
-    class="hidden md:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white/95 dark:bg-zinc-950/95 px-4 pt-3 pb-5 space-y-1 backdrop-blur-md"
+    class="hidden md:hidden mt-3 pt-3 pb-2 border-t border-zinc-200/80 dark:border-zinc-800/80 space-y-1"
   >
     {
       navLinks.map((link) => (
         <a
           href={link.href}
-          class:list={[
-            'block px-3 py-2 text-sm font-mono font-medium rounded-lg transition-colors',
-            isActive(link.href)
-              ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40'
-              : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900',
-          ]}
+          data-nav-id={link.id}
+          data-i18n-key={link.key}
+          class="mobile-nav-link block px-3 py-1.5 text-xs font-sans font-medium rounded-full transition-colors text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800"
         >
-          {link.label}
+          {t(link.key)}
         </a>
       ))
     }
-    <div class="pt-2 border-t border-zinc-100 dark:border-zinc-800">
+    <div class="pt-2 mt-1 border-t border-zinc-100 dark:border-zinc-800/60 flex items-center justify-between px-2">
       <a
-        href="/resume"
-        class="block px-3 py-2 text-sm font-mono font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-lg"
+        href="#experience"
+        class="text-xs font-sans font-medium text-blue-600 dark:text-blue-400 hover:underline"
       >
-        Download CV / Resume
+        <span data-i18n-key="nav.download_cv">{t('nav.download_cv')}</span>
       </a>
     </div>
   </div>
 </header>
 
 <script>
-  const menuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const menuIconOpen = document.getElementById('menu-icon-open');
-  const menuIconClose = document.getElementById('menu-icon-close');
+  // Mobile Hamburger Toggle
+  function setupMobileMenu() {
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIconOpen = document.getElementById('menu-icon-open');
+    const menuIconClose = document.getElementById('menu-icon-close');
 
-  menuButton?.addEventListener('click', () => {
-    const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
-    menuButton.setAttribute('aria-expanded', String(!isExpanded));
-    mobileMenu?.classList.toggle('hidden');
-    menuIconOpen?.classList.toggle('hidden');
-    menuIconClose?.classList.toggle('hidden');
-  });
+    menuButton?.addEventListener('click', () => {
+      const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!isExpanded));
+      mobileMenu?.classList.toggle('hidden');
+      menuIconOpen?.classList.toggle('hidden');
+      menuIconClose?.classList.toggle('hidden');
+    });
+
+    // Close mobile menu upon clicking any anchor
+    document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileMenu?.classList.add('hidden');
+        menuIconOpen?.classList.remove('hidden');
+        menuIconClose?.classList.add('hidden');
+        menuButton?.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  // ScrollSpy to highlight active section in floating navbar
+  function setupScrollSpy() {
+    const navLinks = document.querySelectorAll<HTMLElement>('.nav-anchor-link, .mobile-nav-link');
+    const sectionIds = ['about', 'projects', 'experience', 'skills', 'contact'];
+    const sections: HTMLElement[] = [];
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) sections.push(el);
+    });
+
+    if (sections.length === 0) return;
+
+    const highlightActiveNav = () => {
+      const scrollPosition = window.scrollY + 180;
+      let activeSectionId = '';
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section.offsetTop <= scrollPosition) {
+          activeSectionId = section.id;
+          break;
+        }
+      }
+
+      navLinks.forEach((link) => {
+        const linkNavId = link.getAttribute('data-nav-id');
+        if (linkNavId === activeSectionId) {
+          link.classList.add('bg-blue-500/10', 'text-blue-600', 'dark:text-blue-400', 'font-semibold');
+          link.classList.remove('text-zinc-600', 'dark:text-zinc-400');
+        } else {
+          link.classList.remove('bg-blue-500/10', 'text-blue-600', 'dark:text-blue-400', 'font-semibold');
+          link.classList.add('text-zinc-600', 'dark:text-zinc-400');
+        }
+      });
+    };
+
+    let ticking = false;
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            highlightActiveNav();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+    highlightActiveNav();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      setupMobileMenu();
+      setupScrollSpy();
+    });
+  } else {
+    setupMobileMenu();
+    setupScrollSpy();
+  }
 </script>
-

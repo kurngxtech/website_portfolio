@@ -1,24 +1,31 @@
 ---
 const currentYear = 2026;
+import { t } from '../../i18n/translations';
 ---
 
 <footer class="mt-auto border-t border-zinc-200 dark:border-zinc-800/80 bg-white/50 dark:bg-zinc-950/50 py-12 transition-colors">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
       <div>
-        <span class="font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+        <span class="font-sans text-sm font-semibold text-zinc-900 dark:text-zinc-100">
           Bagus Kurniawan
         </span>
-        <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-mono">
-          Software Engineer · Building reliable systems
+        <p
+          class="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-sans"
+          data-i18n-key="footer.tagline"
+        >
+          {t('footer.tagline')}
         </p>
-        <p class="text-xs text-zinc-400 dark:text-zinc-500 mt-2 font-mono">
-          Built with Astro · TypeScript · Tailwind CSS
+        <p
+          class="text-xs text-zinc-400 dark:text-zinc-500 mt-1 font-sans"
+          data-i18n-key="footer.built_with"
+        >
+          {t('footer.built_with')}
         </p>
       </div>
 
       <!-- Links -->
-      <div class="flex flex-wrap items-center gap-6 text-xs font-mono text-zinc-600 dark:text-zinc-400">
+      <div class="flex flex-wrap items-center gap-6 text-xs font-sans font-medium text-zinc-600 dark:text-zinc-400">
         <a
           href="https://github.com/kurngxtech/"
           target="_blank"
@@ -28,30 +35,25 @@ const currentYear = 2026;
           GitHub
         </a>
         <a
-          href="/contact"
+          href="mailto:gedebagusk@gmail.com"
           class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
         >
-          LinkedIn [Placeholder]
+          Email
         </a>
         <a
-          href="mailto:bagus.kurniawan@example.com"
+          href="#experience"
           class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
         >
-          Email [Placeholder]
-        </a>
-        <a
-          href="/resume"
-          class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-        >
-          Resume
+          <span data-i18n-key="footer.resume">{t('footer.resume')}</span>
         </a>
       </div>
     </div>
 
-    <div class="mt-8 pt-6 border-t border-zinc-100 dark:border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-400 dark:text-zinc-500">
-      <span>© {currentYear} Bagus Kurniawan. All rights reserved.</span>
+    <div class="mt-8 pt-6 border-t border-zinc-100 dark:border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-sans text-zinc-400 dark:text-zinc-500">
+      <span data-i18n-key="footer.copyright">
+        {t('footer.copyright')}
+      </span>
       <span>kurngxtech.dev</span>
     </div>
   </div>
 </footer>
-

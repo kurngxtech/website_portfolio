@@ -15,7 +15,7 @@ const project = projects.find((p) => p.slug === 'smartwaste')!;
     <div class="mb-8">
       <a
         href="/projects"
-        class="inline-flex items-center text-xs font-mono text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        class="inline-flex items-center text-xs font-sans font-medium text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
       >
         <span class="mr-1">←</span> Back to Projects
       </a>
@@ -26,7 +26,7 @@ const project = projects.find((p) => p.slug === 'smartwaste')!;
       <div class="flex flex-wrap items-center gap-2 mb-3">
         <Badge variant="accent">{project.category}</Badge>
         <Badge variant="outline">{project.status}</Badge>
-        <span class="text-xs font-mono text-zinc-400 dark:text-zinc-500">
+        <span class="text-xs font-sans font-medium text-zinc-400 dark:text-zinc-500">
           {project.year}
         </span>
       </div>
@@ -40,26 +40,26 @@ const project = projects.find((p) => p.slug === 'smartwaste')!;
       </p>
 
       <!-- Project Metadata Grid -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 pt-6 border-t border-zinc-100 dark:border-zinc-800/80 text-xs font-mono">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 pt-6 border-t border-zinc-100 dark:border-zinc-800/80 text-xs font-sans">
         <div>
-          <span class="block text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-1">Role</span>
-          <span class="font-semibold text-zinc-800 dark:text-zinc-200">{project.role}</span>
+          <span class="block text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-1 font-semibold">Role</span>
+          <span class="font-medium text-zinc-800 dark:text-zinc-200">{project.role}</span>
         </div>
         <div>
-          <span class="block text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-1">Tech Stack</span>
-          <span class="font-semibold text-zinc-800 dark:text-zinc-200">Angular · MongoDB</span>
+          <span class="block text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-1 font-semibold">Tech Stack</span>
+          <span class="font-medium text-zinc-800 dark:text-zinc-200">Angular · MongoDB</span>
         </div>
         <div>
-          <span class="block text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-1">Context</span>
-          <span class="font-semibold text-zinc-800 dark:text-zinc-200">Academic Initiative</span>
+          <span class="block text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-1 font-semibold">Context</span>
+          <span class="font-medium text-zinc-800 dark:text-zinc-200">Academic Initiative</span>
         </div>
         <div>
-          <span class="block text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-1">Repository</span>
+          <span class="block text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-1 font-semibold">Repository</span>
           <a
             href="https://github.com/kurngxtech/"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-blue-600 dark:text-blue-400 hover:underline"
+            class="text-blue-600 dark:text-blue-400 hover:underline font-medium"
           >
             GitHub Profile ↗
           </a>
@@ -76,10 +76,10 @@ const project = projects.find((p) => p.slug === 'smartwaste')!;
 
     <!-- Case Study Body -->
     <div class="space-y-12 text-zinc-700 dark:text-zinc-300 leading-relaxed text-sm md:text-base">
-      <!-- 01 / Problem & Target Users -->
+      <!-- Problem & Target Users -->
       <section>
-        <h2 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-2">
-          01 / Problem & Motivation
+        <h2 class="text-xs font-sans uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-2">
+          Problem & Motivation
         </h2>
         <h3 class="text-xl md:text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-4">
           Minimizing Food Waste via Digital Tracking
@@ -90,20 +90,20 @@ const project = projects.find((p) => p.slug === 'smartwaste')!;
         <p>
           SmartWaste was conceptualized as a web application to bridge this gap, helping users log inventory, receive expiration alerts, and identify surplus food items before spoilage occurs.
         </p>
-        <div class="p-4 rounded-lg bg-zinc-100/70 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mt-4">
+        <div class="p-4 rounded-lg bg-zinc-100/70 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 text-xs font-sans text-zinc-600 dark:text-zinc-400 mt-4">
           <em>Verification Note: In accordance with project guidelines, no speculative carbon reduction or arbitrary environmental metrics are claimed without audited empirical data.</em>
         </div>
       </section>
 
-      <!-- 02 / Solution & Planned Features -->
+      <!-- Solution & Planned Features -->
       <section>
-        <h2 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-2">
-          02 / Solution Architecture
+        <h2 class="text-xs font-sans uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-2">
+          Solution Architecture
         </h2>
         <h3 class="text-xl md:text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-4">
           Web Application Workflow
         </h3>
-        <ul class="space-y-2 mb-4 font-mono text-xs sm:text-sm">
+        <ul class="space-y-2 mb-4 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
           <li class="flex items-start gap-2">
             <span class="text-blue-500 font-bold">↳</span>
             <span>Food item logging and categorical storage breakdown.</span>
@@ -119,10 +119,10 @@ const project = projects.find((p) => p.slug === 'smartwaste')!;
         </ul>
       </section>
 
-      <!-- 03 / Database & Technical Challenge -->
+      <!-- Database & Technical Challenge -->
       <section>
-        <h2 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-2">
-          03 / Technical Implementation & Challenges
+        <h2 class="text-xs font-sans uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-2">
+          Technical Implementation & Challenges
         </h2>
         <h3 class="text-xl md:text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-4">
           Flexible Document Schemas in MongoDB
@@ -130,15 +130,15 @@ const project = projects.find((p) => p.slug === 'smartwaste')!;
         <p class="mb-4">
           Because perishable goods carry diverse metadata attributes (chilled vs frozen, packaged vs produce, perishable intervals), MongoDB was selected for its schema flexibility.
         </p>
-        <div class="p-4 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 font-mono text-xs text-zinc-600 dark:text-zinc-400">
+        <div class="p-4 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-sans text-zinc-600 dark:text-zinc-400">
           [TECHNICAL IMPLEMENTATION AND EXPERIENCED CHALLENGES TO BE UPDATED FROM REPORT]
         </div>
       </section>
 
-      <!-- 04 / Result -->
+      <!-- Result -->
       <section>
-        <h2 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-2">
-          04 / Result
+        <h2 class="text-xs font-sans uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-2">
+          Result
         </h2>
         <h3 class="text-xl md:text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-4">
           Academic Project Delivery
@@ -153,13 +153,13 @@ const project = projects.find((p) => p.slug === 'smartwaste')!;
     <div class="mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
       <a
         href="/projects/cinema-ticketing"
-        class="text-xs font-mono text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400"
+        class="text-xs font-sans font-medium text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400"
       >
         ← Previous: Cinema Ticketing
       </a>
       <a
         href="/projects/android-health"
-        class="text-xs font-mono text-blue-600 dark:text-blue-400 hover:underline"
+        class="text-xs font-sans font-medium text-blue-600 dark:text-blue-400 hover:underline"
       >
         Next: Android Health →
       </a>

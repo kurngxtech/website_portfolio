@@ -4,348 +4,878 @@ import Button from '../components/ui/Button.astro';
 import Badge from '../components/ui/Badge.astro';
 import SectionHeading from '../components/ui/SectionHeading.astro';
 import ProjectCard from '../components/projects/ProjectCard.astro';
-import { projects, skillsData, learningAreas } from '../data/projects';
-import { notes } from '../data/notes';
+import TechIcon from '../components/ui/TechIcon.astro';
+import { projects, skillsData } from '../data/projects';
+import { t } from '../i18n/translations';
 
-const featuredProjects = projects.filter((p) => p.featured);
-const secondaryProjects = projects.filter((p) => !p.featured);
-const recentNotes = notes.slice(0, 3);
+// All projects for horizontal scroll showcase
+const allProjects = projects;
 ---
 
 <Layout title="Bagus Kurniawan | Software Engineer">
-  <!-- HERO SECTION -->
-  <section class="py-6 md:py-14 border-b border-zinc-200 dark:border-zinc-800/80">
-    <!-- Availability Indicator -->
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-200 bg-emerald-50/80 dark:border-emerald-900/60 dark:bg-emerald-950/30 text-xs font-mono text-emerald-700 dark:text-emerald-400 mb-6">
-      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true"></span>
-      <span>Open to full-time opportunities</span>
-    </div>
-
-    <!-- Main Headline -->
-    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-      Bagus Kurniawan
-    </h1>
-    <p class="mt-2 text-lg sm:text-xl font-mono font-medium text-blue-600 dark:text-blue-400">
-      Software Engineer
-    </p>
-
-    <!-- Supporting Positioning -->
-    <p class="mt-4 text-base sm:text-lg text-zinc-600 dark:text-zinc-300 max-w-2xl leading-relaxed">
-      Building reliable web applications and production-ready systems, with a growing focus on backend engineering, cloud infrastructure, and application security.
-    </p>
-
-    <p class="mt-2 text-xs font-mono text-zinc-500 dark:text-zinc-400">
-      Based in Indonesia · Open to remote international opportunities
-    </p>
-
-    <!-- CTAs -->
-    <div class="mt-8 flex flex-wrap items-center gap-3">
-      <Button href="#selected-work" variant="primary">
-        View Projects
-      </Button>
-      <Button href="https://github.com/kurngxtech/" target="_blank" rel="noopener noreferrer" variant="outline">
-        <svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
-        </svg>
-        GitHub
-      </Button>
-      <Button href="/resume" variant="ghost">
-        Download CV
-      </Button>
-    </div>
-
-    <!-- Subtle Technical Metadata Box -->
-    <div class="mt-10 p-4 rounded-lg border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-100/50 dark:bg-zinc-900/40 max-w-xl">
-      <span class="block text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2 font-medium">
-        Currently working with
-      </span>
-      <div class="flex flex-wrap gap-2 text-xs font-mono text-zinc-700 dark:text-zinc-300">
-        <span class="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">TypeScript</span>
-        <span class="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">React</span>
-        <span class="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">Angular</span>
-        <span class="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">Node.js</span>
-        <span class="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">PostgreSQL</span>
-        <span class="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">Supabase</span>
-        <span class="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">Docker</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- SELECTED WORK SECTION -->
-  <section id="selected-work" class="py-12 md:py-16 border-b border-zinc-200 dark:border-zinc-800/80">
-    <SectionHeading
-      eyebrow="01 / SELECTED WORK"
-      title="Featured Projects"
-      description="Projects built through academic, personal, and production experience, emphasizing system architecture and practical engineering."
-    />
-
-    <div class="space-y-6">
-      {featuredProjects.map((project) => (
-        <ProjectCard project={project} featured={project.slug === 'saint-ink-tattoo'} />
-      ))}
-    </div>
-
-    <!-- Secondary Projects Subsection -->
-    <div class="mt-12 pt-8 border-t border-zinc-100 dark:border-zinc-800/80">
-      <h3 class="text-sm font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-6 font-medium">
-        Other Noteworthy Projects
-      </h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {secondaryProjects.map((project) => (
-          <ProjectCard project={project} featured={false} />
-        ))}
-      </div>
-    </div>
-
-    <div class="mt-8 text-center">
-      <a
-        href="/projects"
-        class="inline-flex items-center text-xs font-mono font-medium text-blue-600 dark:text-blue-400 hover:underline"
-      >
-        View all project documentation and architecture details <span class="ml-1" aria-hidden="true">→</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE SUMMARY SECTION -->
-  <section class="py-12 md:py-16 border-b border-zinc-200 dark:border-zinc-800/80">
-    <SectionHeading
-      eyebrow="02 / EXPERIENCE"
-      title="Professional Experience"
-      description="Hands-on software development in production team environments."
-    />
-
-    <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 md:p-8">
-      <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-2">
-        <h3 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
-          Software Development Intern
-        </h3>
-        <span class="text-xs font-mono text-zinc-500 dark:text-zinc-400">
-          2026 · [Company name — placeholder until provided]
-        </span>
-      </div>
-
-      <div class="flex items-center gap-2 mb-4 text-xs font-mono text-blue-600 dark:text-blue-400">
-        <span>Role: Backend Developer</span>
-        <span>·</span>
-        <span>Project: Saint Ink Tattoo</span>
-      </div>
-
-      <p class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-3xl">
-        Contributed to a production web platform as part of a two-person development team, with responsibilities spanning backend-oriented development, CMS functionality, authentication, database integration, security controls, testing, CI/CD, and production deployment.
-      </p>
-
-      <div class="mt-4 pt-4 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between">
-        <div class="flex flex-wrap gap-1.5">
-          <Badge size="sm">React</Badge>
-          <Badge size="sm">TypeScript</Badge>
-          <Badge size="sm">Supabase</Badge>
-          <Badge size="sm">PostgreSQL RLS</Badge>
-          <Badge size="sm">Playwright</Badge>
-        </div>
-        <a
-          href="/projects/saint-ink-tattoo"
-          class="text-xs font-mono font-medium text-blue-600 dark:text-blue-400 hover:underline"
+  <!-- 1. HERO SECTION (Editorial, Personal & Balanced) -->
+  <section id="hero" class="py-12 sm:py-16 md:py-24 border-b border-zinc-200/70 dark:border-zinc-800/70">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      <!-- Left Column: Introduction, Headline & CTAs (7 Cols) -->
+      <div class="lg:col-span-7 space-y-6">
+        <!-- Availability Indicator -->
+        <div
+          id="hero-badge"
+          class="hero-fade-in inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-200/80 bg-emerald-50/70 dark:border-emerald-900/50 dark:bg-emerald-950/30 text-xs font-sans font-medium text-emerald-700 dark:text-emerald-400"
         >
-          View Case Study →
-        </a>
-      </div>
-    </div>
-
-    <div class="mt-6 text-right">
-      <a href="/experience" class="text-xs font-mono font-medium text-blue-600 dark:text-blue-400 hover:underline">
-        Detailed experience timeline →
-      </a>
-    </div>
-  </section>
-
-  <!-- TECHNICAL SKILLS SECTION -->
-  <section class="py-12 md:py-16 border-b border-zinc-200 dark:border-zinc-800/80">
-    <SectionHeading
-      eyebrow="03 / TECHNICAL SKILLS"
-      title="Technologies & Tools"
-      description="Concrete technologies applied across production, internship, and coursework projects. No arbitrary proficiency numbers or star ratings."
-    />
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      <div class="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5">
-        <h4 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3">
-          Languages
-        </h4>
-        <div class="flex flex-wrap gap-2">
-          {skillsData.languages.map((skill) => (
-            <Badge variant="default">{skill}</Badge>
-          ))}
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true"></span>
+          <span data-i18n-key="hero.badge">
+            {t('hero.badge')}
+          </span>
         </div>
-      </div>
 
-      <div class="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5">
-        <h4 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3">
-          Frontend
-        </h4>
-        <div class="flex flex-wrap gap-2">
-          {skillsData.frontend.map((skill) => (
-            <Badge variant="default">{skill}</Badge>
-          ))}
-        </div>
-      </div>
-
-      <div class="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5">
-        <h4 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3">
-          Backend
-        </h4>
-        <div class="flex flex-wrap gap-2">
-          {skillsData.backend.map((skill) => (
-            <Badge variant="default">{skill}</Badge>
-          ))}
-        </div>
-      </div>
-
-      <div class="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5">
-        <h4 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3">
-          Databases
-        </h4>
-        <div class="flex flex-wrap gap-2">
-          {skillsData.databases.map((skill) => (
-            <Badge variant="default">{skill}</Badge>
-          ))}
-        </div>
-      </div>
-
-      <div class="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5">
-        <h4 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3">
-          Testing & QA
-        </h4>
-        <div class="flex flex-wrap gap-2">
-          {skillsData.testing.map((skill) => (
-            <Badge variant="default">{skill}</Badge>
-          ))}
-        </div>
-      </div>
-
-      <div class="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5">
-        <h4 class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3">
-          DevOps & Tools
-        </h4>
-        <div class="flex flex-wrap gap-2">
-          {skillsData.devops.map((skill) => (
-            <Badge variant="default">{skill}</Badge>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CURRENTLY LEARNING / FUTURE DIRECTION -->
-  <section class="py-12 md:py-16 border-b border-zinc-200 dark:border-zinc-800/80">
-    <SectionHeading
-      eyebrow="04 / CAREER DIRECTION"
-      title="Currently Learning"
-      description="Active engineering focus areas bridging current web development experience with long-term goals in backend, cloud, and security."
-    />
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {learningAreas.map((area) => (
-        <div class="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5">
-          <div class="flex items-center justify-between mb-2">
-            <h4 class="text-sm font-mono font-semibold text-zinc-900 dark:text-zinc-100">
-              {area.title}
-            </h4>
-            <span class="text-xs font-mono text-blue-600 dark:text-blue-400">In Progress</span>
+        <!-- Main Headline -->
+        <div>
+          <div class="pb-2 sm:pb-3 -mb-2 sm:-mb-3">
+            <h1
+              id="hero-title"
+              class="hero-fade-in text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50 pb-1"
+            >
+              <span data-i18n-key="hero.name">{t('hero.name')}</span>
+            </h1>
           </div>
-          <p class="text-xs text-zinc-600 dark:text-zinc-400 mb-3 leading-relaxed">
-            {area.description}
+
+          <!-- Role with continuous infinite typewriter animation -->
+          <div class="mt-2.5 sm:mt-3.5 flex items-center min-h-[38px]" style="contain: layout paint;">
+            <span
+              id="hero-typewriter"
+              class="text-xl sm:text-2xl md:text-3xl font-sans font-semibold text-blue-600 dark:text-blue-400 tracking-tight"
+            >
+              Software Engineer
+            </span>
+            <span
+              class="inline-block w-[3px] h-6 sm:h-7 ml-1.5 bg-blue-600 dark:bg-blue-400 animate-pulse align-middle"
+              aria-hidden="true"
+            ></span>
+          </div>
+        </div>
+
+        <!-- Supporting Editorial Positioning -->
+        <p
+          id="hero-desc"
+          data-i18n-key="hero.desc"
+          class="hero-fade-in text-base sm:text-lg text-zinc-600 dark:text-zinc-300 max-w-xl leading-relaxed font-normal"
+        >
+          {t('hero.desc')}
+        </p>
+
+        <p
+          id="hero-location"
+          data-i18n-key="hero.location"
+          class="hero-fade-in text-xs font-sans font-medium text-zinc-500 dark:text-zinc-400 flex items-center gap-1.5"
+        >
+          <svg class="w-3.5 h-3.5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <span>{t('hero.location')}</span>
+        </p>
+
+        <!-- Clean CTAs -->
+        <div id="hero-actions" class="hero-fade-in pt-2 flex flex-wrap items-center gap-3">
+          <Button href="#projects" variant="primary">
+            <span data-i18n-key="hero.cta_projects">{t('hero.cta_projects')}</span>
+          </Button>
+          <Button href="https://github.com/kurngxtech/" target="_blank" rel="noopener noreferrer" variant="outline">
+            <svg class="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+            </svg>
+            GitHub
+          </Button>
+          <Button href="#experience" variant="ghost">
+            <span data-i18n-key="hero.cta_cv">{t('hero.cta_cv')}</span>
+          </Button>
+        </div>
+      </div>
+
+      <!-- Right Column: Personal Portrait Photography Frame (5 Cols) -->
+      <div class="lg:col-span-5 flex justify-center lg:justify-end">
+        <div class="group relative w-64 sm:w-72 lg:w-80 aspect-[4/5] rounded-2xl overflow-hidden glass-card shadow-xl shadow-zinc-900/5 dark:shadow-blue-500/5 transition-all duration-300 hover:shadow-2xl">
+          <img
+            src="/images/portrait-placeholder.svg"
+            alt="Bagus Kurniawan Portrait"
+            width="320"
+            height="400"
+            fetchpriority="high"
+            class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+          />
+          <!-- Bottom subtle indicator badge -->
+          <div class="absolute bottom-3 left-3 right-3 px-3.5 py-2.5 rounded-xl bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 text-xs text-zinc-600 dark:text-zinc-300 flex items-center justify-between shadow-xs">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-blue-500 shrink-0"></span>
+              <span class="font-semibold text-xs leading-normal text-zinc-800 dark:text-zinc-100 font-sans">Bagus Kurniawan</span>
+            </div>
+            <span class="text-[10px] font-sans font-medium text-zinc-400">Software Engineer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. WHO I AM & WORK ETHIC (Editorial & Human-Centered) -->
+  <section id="about" class="py-16 sm:py-20 md:py-24 border-b border-zinc-200/70 dark:border-zinc-800/70">
+    <div class="reveal-on-scroll">
+      <SectionHeading
+        titleKey="about.title"
+        descKey="about.desc"
+      />
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- Left Column: Narrative & Work Ethic (7 Cols) -->
+      <div class="lg:col-span-7 space-y-6">
+        <!-- About Me Block -->
+        <div class="reveal-on-scroll rounded-2xl glass-card p-6 sm:p-8 transition-all hover:border-zinc-300 dark:hover:border-zinc-700">
+          <span
+            data-i18n-key="about.me_title"
+            class="block text-xs font-sans uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3"
+          >
+            {t('about.me_title')}
+          </span>
+          <p
+            data-i18n-key="about.me_text"
+            class="text-base sm:text-lg font-normal text-zinc-800 dark:text-zinc-100 leading-relaxed"
+          >
+            {t('about.me_text')}
           </p>
-          <div class="flex flex-wrap gap-1.5 pt-2 border-t border-zinc-100 dark:border-zinc-800">
-            {area.topics.map((topic) => (
-              <span class="text-xs font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
-                {topic}
-              </span>
+        </div>
+
+        <!-- Work Ethic Block -->
+        <div class="reveal-on-scroll rounded-2xl glass-card p-6 sm:p-8 transition-all hover:border-zinc-300 dark:hover:border-zinc-700">
+          <span
+            data-i18n-key="about.work_ethic_title"
+            class="block text-xs font-sans uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3"
+          >
+            {t('about.work_ethic_title')}
+          </span>
+          <p
+            data-i18n-key="about.work_ethic_text"
+            class="text-base sm:text-lg font-normal text-zinc-800 dark:text-zinc-100 leading-relaxed"
+          >
+            {t('about.work_ethic_text')}
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Column: Personal Information Block (5 Cols) -->
+      <div class="lg:col-span-5">
+        <div class="reveal-on-scroll rounded-2xl glass-card p-6 sm:p-8 space-y-5">
+          <h3
+            data-i18n-key="about.details_title"
+            class="text-xs font-sans uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold pb-3 border-b border-zinc-200/60 dark:border-zinc-800/60"
+          >
+            {t('about.details_title')}
+          </h3>
+
+          <dl class="space-y-4 text-xs font-sans">
+            <div>
+              <dt
+                class="text-zinc-400 dark:text-zinc-500 mb-1 font-medium"
+                data-i18n-key="about.label_name"
+              >
+                {t('about.label_name')}
+              </dt>
+              <dd
+                class="text-sm font-semibold text-zinc-900 dark:text-zinc-100"
+                data-i18n-key="about.value_name"
+              >
+                {t('about.value_name')}
+              </dd>
+            </div>
+
+            <div class="pt-3 border-t border-zinc-200/50 dark:border-zinc-800/50">
+              <dt
+                class="text-zinc-400 dark:text-zinc-500 mb-1 font-medium"
+                data-i18n-key="about.label_pob"
+              >
+                {t('about.label_pob')}
+              </dt>
+              <dd
+                class="text-sm font-medium text-zinc-800 dark:text-zinc-200 font-sans"
+                data-i18n-key="about.value_pob"
+              >
+                {t('about.value_pob')}
+              </dd>
+            </div>
+
+            <div class="pt-3 border-t border-zinc-200/50 dark:border-zinc-800/50">
+              <dt
+                class="text-zinc-400 dark:text-zinc-500 mb-1 font-medium"
+                data-i18n-key="about.label_gpa"
+              >
+                {t('about.label_gpa')}
+              </dt>
+              <dd
+                class="text-sm font-semibold text-zinc-900 dark:text-zinc-100 font-sans"
+                data-i18n-key="about.value_gpa"
+              >
+                {t('about.value_gpa')}
+              </dd>
+            </div>
+
+            <div class="pt-3 border-t border-zinc-200/50 dark:border-zinc-800/50">
+              <dt
+                class="text-zinc-400 dark:text-zinc-500 mb-1"
+                data-i18n-key="about.label_email"
+              >
+                {t('about.label_email')}
+              </dt>
+              <dd>
+                <a
+                  href="mailto:gedebagusk@gmail.com"
+                  class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline break-all"
+                  data-i18n-key="about.value_email"
+                >
+                  {t('about.value_email')}
+                </a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. SELECTED WORK SECTION (Cinematic Horizontal Auto-Scroll Carousel) -->
+  <section id="projects" class="py-16 sm:py-20 md:py-24 border-b border-zinc-200/70 dark:border-zinc-800/70 overflow-hidden">
+    <div class="reveal-on-scroll max-w-2xl mb-6">
+      <SectionHeading
+        titleKey="projects.title"
+        descKey="projects.desc"
+      />
+    </div>
+
+    <!-- Full-Bleed Carousel Container (Extends beyond viewport, hides outside overflow) -->
+    <div class="relative left-1/2 -translate-x-1/2 w-screen overflow-hidden py-2">
+      <!-- Track & Symmetrical Side Masking Overlays Wrapper -->
+      <div id="projects-carousel-wrapper" class="relative w-full overflow-hidden cursor-grab active:cursor-grabbing select-none">
+        <!-- Left Side Masking Overlay (Smooth Multi-Stop Fade) -->
+        <div
+          class="carousel-mask-left pointer-events-none absolute left-0 top-0 bottom-0 z-30 w-14 sm:w-24 md:w-36 lg:w-52 xl:w-80 2xl:w-[450px]"
+          aria-hidden="true"
+        ></div>
+
+        <!-- Right Side Masking Overlay (Smooth Multi-Stop Fade) -->
+        <div
+          class="carousel-mask-right pointer-events-none absolute right-0 top-0 bottom-0 z-30 w-14 sm:w-24 md:w-36 lg:w-52 xl:w-80 2xl:w-[450px]"
+          aria-hidden="true"
+        ></div>
+
+        <!-- Hardware-Accelerated Infinite Marquee Track (Runs on GPU Compositor Thread) -->
+        <div
+          id="projects-marquee-track"
+          class="carousel-marquee-track flex gap-5 sm:gap-6 py-2 px-4 focus:outline-none"
+          tabindex="0"
+          aria-label="Projects interactive horizontal carousel"
+        >
+          <!-- Set 1 (Primary) -->
+          <div class="flex gap-5 sm:gap-6 flex-none">
+            {allProjects.map((project) => (
+              <ProjectCard project={project} featured={project.slug === 'saint-ink-tattoo'} />
+            ))}
+          </div>
+
+          <!-- Set 2 (Seamless loop clone) -->
+          <div class="flex gap-5 sm:gap-6 flex-none" aria-hidden="true">
+            {allProjects.map((project) => (
+              <ProjectCard project={project} featured={project.slug === 'saint-ink-tattoo'} />
             ))}
           </div>
         </div>
-      ))}
+      </div>
+
+      <!-- Bottom Interactive Hint -->
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 flex items-center gap-2 text-xs font-sans text-zinc-500 dark:text-zinc-400">
+        <span class="inline-block w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-500 animate-pulse" aria-hidden="true"></span>
+        <span data-i18n-key="projects.scroll_hint">{t('projects.scroll_hint')}</span>
+      </div>
     </div>
   </section>
 
-  <!-- NOTES PREVIEW SECTION -->
-  <section class="py-12 md:py-16 border-b border-zinc-200 dark:border-zinc-800/80">
-    <SectionHeading
-      eyebrow="05 / TECHNICAL WRITING"
-      title="Engineering Notes"
-      description="Short technical writeups on lessons learned from debugging, database security, and system architecture."
-    />
+  <!-- 4. EXPERIENCE SECTION (Editorial Timeline) -->
+  <section id="experience" class="py-16 sm:py-20 md:py-24 border-b border-zinc-200/70 dark:border-zinc-800/70">
+    <div class="reveal-on-scroll">
+      <SectionHeading
+        titleKey="experience.title"
+        descKey="experience.desc"
+      />
+    </div>
 
-    <div class="space-y-4">
-      {recentNotes.map((note) => (
-        <article class="group rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5 transition-colors hover:border-zinc-300 dark:hover:border-zinc-700">
-          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 text-xs font-mono mb-2">
-            <span class="text-blue-600 dark:text-blue-400">{note.category}</span>
-            <span class="text-zinc-400">{note.date} · {note.readingTime}</span>
+    <!-- Timeline Container -->
+    <div class="relative border-l border-zinc-200 dark:border-zinc-800 ml-3 sm:ml-4 pl-6 sm:pl-8 space-y-10">
+      <!-- Software Development Intern -->
+      <div class="relative reveal-on-scroll">
+        <span class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full border-2 border-blue-600 bg-white dark:bg-zinc-950" aria-hidden="true"></span>
+
+        <div class="flex flex-wrap items-center gap-2 mb-2">
+          <Badge variant="accent"><span data-i18n-key="experience.badge_internship">{t('experience.badge_internship')}</span></Badge>
+          <Badge variant="success"><span data-i18n-key="experience.badge_production">{t('experience.badge_production')}</span></Badge>
+          <span class="text-xs font-sans font-medium text-zinc-400">2026</span>
+        </div>
+
+        <h3
+          class="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100"
+          data-i18n-key="experience.intern_title"
+        >
+          {t('experience.intern_title')}
+        </h3>
+
+        <p
+          class="text-sm font-sans font-medium text-blue-600 dark:text-blue-400 mt-0.5 mb-3"
+          data-i18n-key="experience.intern_role"
+        >
+          {t('experience.intern_role')}
+        </p>
+
+        <p
+          class="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed mb-4 font-normal"
+          data-i18n-key="experience.intern_desc"
+        >
+          {t('experience.intern_desc')}
+        </p>
+
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+          <div class="flex flex-wrap gap-1.5">
+            <Badge size="sm">React</Badge>
+            <Badge size="sm">TypeScript</Badge>
+            <Badge size="sm">Supabase</Badge>
+            <Badge size="sm">PostgreSQL</Badge>
+            <Badge size="sm">Playwright</Badge>
           </div>
-          <h3 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-            <a href={`/notes/${note.slug}`}>{note.title}</a>
+
+          <a
+            href="#projects"
+            class="text-xs font-sans font-semibold text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1"
+          >
+            <span data-i18n-key="experience.intern_case_study">{t('experience.intern_case_study')}</span>
+            <span aria-hidden="true">↑</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Academic Background -->
+      <div class="relative reveal-on-scroll pt-2">
+        <span class="absolute -left-[31px] sm:-left-[39px] top-3.5 w-3.5 h-3.5 rounded-full border-2 border-zinc-400 bg-white dark:bg-zinc-950" aria-hidden="true"></span>
+
+        <div class="flex items-center gap-2 mb-1.5">
+          <Badge variant="outline"><span data-i18n-key="experience.badge_academic">{t('experience.badge_academic')}</span></Badge>
+          <span class="text-xs font-sans font-medium text-zinc-400" data-i18n-key="experience.badge_current">{t('experience.badge_current')}</span>
+        </div>
+
+        <h3
+          class="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100"
+          data-i18n-key="experience.academic_title"
+        >
+          {t('experience.academic_title')}
+        </h3>
+
+        <p
+          class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1 leading-relaxed"
+          data-i18n-key="experience.academic_desc"
+        >
+          {t('experience.academic_desc')}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. TECHNICAL SKILLS SECTION (Refined Semi-Transparent Cards) -->
+  <section id="skills" class="py-16 sm:py-20 md:py-24 border-b border-zinc-200/70 dark:border-zinc-800/70">
+    <div class="reveal-on-scroll">
+      <SectionHeading
+        titleKey="skills.title"
+        descKey="skills.desc"
+      />
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+      <div class="reveal-on-scroll rounded-2xl glass-card p-5 sm:p-6 transition-card hover:-translate-y-0.5 hover:border-zinc-300 dark:hover:border-zinc-700">
+        <h4
+          class="text-xs font-sans uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3.5"
+          data-i18n-key="skills.languages"
+        >
+          {t('skills.languages')}
+        </h4>
+        <div class="flex flex-wrap gap-2.5">
+          {skillsData.languages.map((skill) => (
+            <TechIcon name={skill} />
+          ))}
+        </div>
+      </div>
+
+      <div class="reveal-on-scroll rounded-2xl glass-card p-5 sm:p-6 transition-card hover:-translate-y-0.5 hover:border-zinc-300 dark:hover:border-zinc-700">
+        <h4
+          class="text-xs font-sans uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3.5"
+          data-i18n-key="skills.frontend"
+        >
+          {t('skills.frontend')}
+        </h4>
+        <div class="flex flex-wrap gap-2.5">
+          {skillsData.frontend.map((skill) => (
+            <TechIcon name={skill} />
+          ))}
+        </div>
+      </div>
+
+      <div class="reveal-on-scroll rounded-2xl glass-card p-5 sm:p-6 transition-card hover:-translate-y-0.5 hover:border-zinc-300 dark:hover:border-zinc-700">
+        <h4
+          class="text-xs font-sans uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3.5"
+          data-i18n-key="skills.backend"
+        >
+          {t('skills.backend')}
+        </h4>
+        <div class="flex flex-wrap gap-2.5">
+          {skillsData.backend.map((skill) => (
+            <TechIcon name={skill} />
+          ))}
+        </div>
+      </div>
+
+      <div class="reveal-on-scroll rounded-2xl glass-card p-5 sm:p-6 transition-card hover:-translate-y-0.5 hover:border-zinc-300 dark:hover:border-zinc-700">
+        <h4
+          class="text-xs font-sans uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3.5"
+          data-i18n-key="skills.databases"
+        >
+          {t('skills.databases')}
+        </h4>
+        <div class="flex flex-wrap gap-2.5">
+          {skillsData.databases.map((skill) => (
+            <TechIcon name={skill} />
+          ))}
+        </div>
+      </div>
+
+      <div class="reveal-on-scroll rounded-2xl glass-card p-5 sm:p-6 transition-card hover:-translate-y-0.5 hover:border-zinc-300 dark:hover:border-zinc-700">
+        <h4
+          class="text-xs font-sans uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3.5"
+          data-i18n-key="skills.testing"
+        >
+          {t('skills.testing')}
+        </h4>
+        <div class="flex flex-wrap gap-2.5">
+          {skillsData.testing.map((skill) => (
+            <TechIcon name={skill} />
+          ))}
+        </div>
+      </div>
+
+      <div class="reveal-on-scroll rounded-2xl glass-card p-5 sm:p-6 transition-card hover:-translate-y-0.5 hover:border-zinc-300 dark:hover:border-zinc-700">
+        <h4
+          class="text-xs font-sans uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-3.5"
+          data-i18n-key="skills.devops"
+        >
+          {t('skills.devops')}
+        </h4>
+        <div class="flex flex-wrap gap-2.5">
+          {skillsData.devops.map((skill) => (
+            <TechIcon name={skill} />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. CONTACT SECTION (Warm & Direct Personal Invitation) -->
+  <section id="contact" class="py-16 sm:py-20 md:py-24">
+    <div class="reveal-on-scroll">
+      <SectionHeading
+        titleKey="contact.title"
+        descKey="contact.desc"
+      />
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- Direct Contact Channels (5 Cols) -->
+      <div class="lg:col-span-5 space-y-4">
+        <div class="reveal-on-scroll rounded-2xl glass-card p-6 sm:p-7">
+          <h3
+            data-i18n-key="contact.direct_heading"
+            class="text-xs font-sans uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-4"
+          >
+            {t('contact.direct_heading')}
           </h3>
-          <p class="mt-2 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
-            {note.summary}
-          </p>
-        </article>
-      ))}
-    </div>
 
-    <div class="mt-6 text-right">
-      <a href="/notes" class="text-xs font-mono font-medium text-blue-600 dark:text-blue-400 hover:underline">
-        Read all notes →
-      </a>
-    </div>
-  </section>
+          <div class="space-y-4 text-xs font-sans">
+            <div>
+              <span
+                class="block text-zinc-400 dark:text-zinc-500 mb-1 font-medium"
+                data-i18n-key="contact.email_label"
+              >
+                {t('contact.email_label')}
+              </span>
+              <a
+                href="mailto:gedebagusk@gmail.com"
+                class="text-sm font-semibold text-zinc-900 dark:text-zinc-100 hover:text-blue-600 dark:hover:text-blue-400 break-all"
+              >
+                gedebagusk@gmail.com
+              </a>
+            </div>
 
-  <!-- ABOUT PREVIEW SECTION -->
-  <section class="py-12 md:py-16 border-b border-zinc-200 dark:border-zinc-800/80">
-    <SectionHeading
-      eyebrow="06 / ABOUT ME"
-      title="Engineering Philosophy"
-      description="Who I am, what drives my work, and how I build software."
-    />
+            <div class="pt-3 border-t border-zinc-200/50 dark:border-zinc-800/50">
+              <span class="block text-zinc-400 dark:text-zinc-500 mb-1 font-medium">GitHub</span>
+              <a
+                href="https://github.com/kurngxtech/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm font-semibold text-zinc-900 dark:text-zinc-100 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1"
+              >
+                github.com/kurngxtech ↗
+              </a>
+            </div>
 
-    <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 md:p-8">
-      <blockquote class="text-base sm:text-lg font-medium text-zinc-800 dark:text-zinc-200 italic leading-relaxed border-l-2 border-blue-600 pl-4 mb-4">
-        "I build software that goes beyond modern design—focused on usability, reliability, security, and real-world impact."
-      </blockquote>
-      <p class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
-        I’m Bagus Kurniawan, an Information Systems student and software developer with hands-on experience building web and mobile applications, including a production project developed during my internship. My current focus is backend engineering, cloud infrastructure, and application security.
-      </p>
-      <div class="mt-4 pt-4 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
-        <span class="text-xs font-mono text-zinc-400 dark:text-zinc-500">
-          Transparency: AI-assisted development disclosure included
-        </span>
-        <a href="/about" class="text-xs font-mono font-medium text-blue-600 dark:text-blue-400 hover:underline">
-          Read full bio & background →
-        </a>
+            <div class="pt-3 border-t border-zinc-200/50 dark:border-zinc-800/50">
+              <span
+                class="block text-zinc-400 dark:text-zinc-500 mb-1 font-medium"
+                data-i18n-key="contact.cv_label"
+              >
+                {t('contact.cv_label')}
+              </span>
+              <a
+                href="#experience"
+                class="text-blue-600 dark:text-blue-400 font-semibold hover:underline"
+              >
+                <span data-i18n-key="contact.view_cv">{t('contact.view_cv')}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Streamlined Contact Form (7 Cols) -->
+      <div class="lg:col-span-7">
+        <div class="reveal-on-scroll rounded-2xl glass-card p-6 sm:p-8">
+          <div class="flex items-center justify-between mb-5">
+            <h3
+              data-i18n-key="contact.form_heading"
+              class="text-base font-semibold text-zinc-900 dark:text-zinc-100"
+            >
+              {t('contact.form_heading')}
+            </h3>
+            <span
+              class="text-xs font-sans font-medium text-zinc-400"
+              data-i18n-key="contact.response_time"
+            >
+              {t('contact.response_time')}
+            </span>
+          </div>
+
+          <form id="contact-form" class="space-y-4" novalidate>
+            <!-- Honeypot for spam mitigation -->
+            <div class="hidden" aria-hidden="true">
+              <label for="honeypot-website">Do not fill this out</label>
+              <input type="text" id="honeypot-website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="contact-name" class="block text-xs font-sans font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+                  <span data-i18n-key="contact.field_name">{t('contact.field_name')}</span> <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="contact-name"
+                  name="name"
+                  required
+                  maxlength="80"
+                  placeholder={t('contact.placeholder_name')}
+                  data-i18n-key="contact.placeholder_name"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/90 dark:bg-zinc-900/90 text-zinc-900 dark:text-zinc-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-colors"
+                />
+                <span
+                  id="name-error"
+                  class="hidden text-xs text-red-500 font-sans mt-1"
+                  data-i18n-key="contact.error_name"
+                >
+                  {t('contact.error_name')}
+                </span>
+              </div>
+
+              <div>
+                <label for="contact-email" class="block text-xs font-sans font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+                  <span data-i18n-key="contact.field_email">{t('contact.field_email')}</span> <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="contact-email"
+                  name="email"
+                  required
+                  maxlength="100"
+                  placeholder={t('contact.placeholder_email')}
+                  data-i18n-key="contact.placeholder_email"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/90 dark:bg-zinc-900/90 text-zinc-900 dark:text-zinc-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-colors"
+                />
+                <span
+                  id="email-error"
+                  class="hidden text-xs text-red-500 font-sans mt-1"
+                  data-i18n-key="contact.error_email"
+                >
+                  {t('contact.error_email')}
+                </span>
+              </div>
+            </div>
+
+            <div>
+              <label for="contact-message" class="block text-xs font-sans font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+                <span data-i18n-key="contact.field_message">{t('contact.field_message')}</span> <span class="text-red-500">*</span>
+              </label>
+              <textarea
+                id="contact-message"
+                name="message"
+                required
+                rows="4"
+                maxlength="2000"
+                placeholder={t('contact.placeholder_message')}
+                data-i18n-key="contact.placeholder_message"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/90 dark:bg-zinc-900/90 text-zinc-900 dark:text-zinc-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-colors resize-y"
+              ></textarea>
+              <span
+                id="message-error"
+                class="hidden text-xs text-red-500 font-sans mt-1"
+                data-i18n-key="contact.error_message"
+              >
+                {t('contact.error_message')}
+              </span>
+            </div>
+
+            <div
+              id="form-success"
+              class="hidden p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-xs font-sans font-medium text-emerald-700 dark:text-emerald-300"
+              data-i18n-key="contact.form_success"
+            >
+              {t('contact.form_success')}
+            </div>
+
+            <div>
+              <Button type="submit" variant="primary" class="w-full sm:w-auto">
+                <span data-i18n-key="contact.submit_button">{t('contact.submit_button')}</span>
+              </Button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT CTA SECTION -->
-  <section class="py-12 md:py-16">
-    <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-8 md:p-10 text-center max-w-3xl mx-auto">
-      <span class="font-mono text-xs text-blue-600 dark:text-blue-400 uppercase tracking-wider font-semibold">
-        07 / GET IN TOUCH
-      </span>
-      <h2 class="mt-3 text-2xl md:text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
-        Let's build something useful.
-      </h2>
-      <p class="mt-3 text-sm text-zinc-600 dark:text-zinc-400 max-w-md mx-auto leading-relaxed">
-        I'm currently open to full-time Software Engineering opportunities and remote engineering roles.
-      </p>
-      <div class="mt-6 flex flex-wrap justify-center gap-3">
-        <Button href="/contact" variant="primary">
-          Contact Me
-        </Button>
-        <Button href="mailto:bagus.kurniawan@example.com" variant="outline">
-          Send Email
-        </Button>
-      </div>
-    </div>
-  </section>
+  <!-- Continuous Infinite Hero Typewriter & Hero Entrance Script -->
+  <script>
+    // --- Continuous Typewriter Logic ---
+    const roles = [
+      'Software Engineer',
+      'Frontend Developer',
+      'Backend Developer',
+      'Fullstack Developer',
+    ];
+
+    let currentRoleIdx = 0;
+    let currentCharIdx = roles[0].length;
+    let isDeleting = true;
+    let typewriterTimeout: any = null;
+
+    function runTypewriter() {
+      const el = document.getElementById('hero-typewriter');
+      if (!el) return;
+
+      const currentWord = roles[currentRoleIdx];
+
+      if (isDeleting) {
+        currentCharIdx--;
+        el.textContent = currentWord.substring(0, currentCharIdx);
+
+        if (currentCharIdx <= 0) {
+          isDeleting = false;
+          currentRoleIdx = (currentRoleIdx + 1) % roles.length;
+          typewriterTimeout = setTimeout(runTypewriter, 320);
+          return;
+        }
+        typewriterTimeout = setTimeout(runTypewriter, 40);
+      } else {
+        currentCharIdx++;
+        el.textContent = currentWord.substring(0, currentCharIdx);
+
+        if (currentCharIdx === currentWord.length) {
+          isDeleting = true;
+          typewriterTimeout = setTimeout(runTypewriter, 2000);
+          return;
+        }
+        typewriterTimeout = setTimeout(runTypewriter, 75);
+      }
+    }
+
+    function initTypewriter() {
+      if (typewriterTimeout) clearTimeout(typewriterTimeout);
+      typewriterTimeout = setTimeout(runTypewriter, 2500);
+    }
+
+    // --- Contact Form Submission & Validation ---
+    function setupContactForm() {
+      const form = document.getElementById('contact-form') as HTMLFormElement | null;
+      const nameInput = document.getElementById('contact-name') as HTMLInputElement | null;
+      const emailInput = document.getElementById('contact-email') as HTMLInputElement | null;
+      const messageInput = document.getElementById('contact-message') as HTMLTextAreaElement | null;
+      const honeypot = document.getElementById('honeypot-website') as HTMLInputElement | null;
+
+      const nameError = document.getElementById('name-error');
+      const emailError = document.getElementById('email-error');
+      const messageError = document.getElementById('message-error');
+      const formSuccess = document.getElementById('form-success');
+
+      form?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (honeypot && honeypot.value.trim() !== '') return;
+
+        let isValid = true;
+        if (!nameInput || nameInput.value.trim().length < 2) {
+          nameError?.classList.remove('hidden');
+          isValid = false;
+        } else {
+          nameError?.classList.add('hidden');
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailInput || !emailRegex.test(emailInput.value.trim())) {
+          emailError?.classList.remove('hidden');
+          isValid = false;
+        } else {
+          emailError?.classList.add('hidden');
+        }
+
+        if (!messageInput || messageInput.value.trim().length < 10) {
+          messageError?.classList.remove('hidden');
+          isValid = false;
+        } else {
+          messageError?.classList.add('hidden');
+        }
+
+        if (isValid) {
+          formSuccess?.classList.remove('hidden');
+          form.reset();
+        }
+      });
+    }
+
+    // --- Compositor-Driven Hardware-Accelerated Project Carousel ---
+    function setupProjectsCarousel() {
+      const wrapper = document.getElementById('projects-carousel-wrapper');
+      const trackEl = document.getElementById('projects-marquee-track');
+      if (!wrapper || !trackEl) return;
+      const track = trackEl;
+
+      let isDown = false;
+      let startX = 0;
+      let currentTranslateX = 0;
+      let hasDragged = false;
+      let resumeTimer: any = null;
+
+      const getTranslateX = (): number => {
+        const style = window.getComputedStyle(track);
+        const transform = style.transform || (style as any).webkitTransform;
+        if (transform && transform !== 'none') {
+          const matrix = transform.match(/^matrix\((.+)\)$/);
+          if (matrix) {
+            return parseFloat(matrix[1].split(',')[4]) || 0;
+          }
+          const matrix3d = transform.match(/^matrix3d\((.+)\)$/);
+          if (matrix3d) {
+            return parseFloat(matrix3d[1].split(',')[12]) || 0;
+          }
+        }
+        return 0;
+      };
+
+      const pauseAndCapture = () => {
+        currentTranslateX = getTranslateX();
+        track.style.animation = 'none';
+        track.style.transform = `translate3d(${currentTranslateX}px, 0, 0)`;
+      };
+
+      const resumeMarquee = () => {
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(() => {
+          track.style.animation = '';
+          track.style.transform = '';
+        }, 1800);
+      };
+
+      // 1. Mouse Wheel Mapping
+      wrapper.addEventListener('wheel', (e: WheelEvent) => {
+        if (Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
+        e.preventDefault();
+        pauseAndCapture();
+        const step = e.deltaY > 0 ? -180 : 180;
+        currentTranslateX += step;
+        track.style.transform = `translate3d(${currentTranslateX}px, 0, 0)`;
+        resumeMarquee();
+      }, { passive: false });
+
+      // 2. Mouse Drag
+      wrapper.addEventListener('mousedown', (e: MouseEvent) => {
+        if (e.button !== 0) return;
+        isDown = true;
+        hasDragged = false;
+        startX = e.pageX;
+        pauseAndCapture();
+      });
+
+      window.addEventListener('mousemove', (e: MouseEvent) => {
+        if (!isDown) return;
+        const dx = e.pageX - startX;
+        if (Math.abs(dx) > 5) {
+          hasDragged = true;
+        }
+        startX = e.pageX;
+        currentTranslateX += dx;
+        track.style.transform = `translate3d(${currentTranslateX}px, 0, 0)`;
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (!isDown) return;
+        isDown = false;
+        resumeMarquee();
+        setTimeout(() => { hasDragged = false; }, 80);
+      });
+
+      wrapper.addEventListener('click', (e: MouseEvent) => {
+        if (hasDragged) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }, true);
+
+      // 3. Touch Support
+      let touchStartX = 0;
+      wrapper.addEventListener('touchstart', (e: TouchEvent) => {
+        touchStartX = e.touches[0].clientX;
+        pauseAndCapture();
+      }, { passive: true });
+
+      wrapper.addEventListener('touchmove', (e: TouchEvent) => {
+        const dx = e.touches[0].clientX - touchStartX;
+        touchStartX = e.touches[0].clientX;
+        currentTranslateX += dx;
+        track.style.transform = `translate3d(${currentTranslateX}px, 0, 0)`;
+      }, { passive: true });
+
+      wrapper.addEventListener('touchend', () => {
+        resumeMarquee();
+      }, { passive: true });
+    }
+
+    // Direct DOM ready initializations
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        initTypewriter();
+        setupContactForm();
+        setupProjectsCarousel();
+      });
+    } else {
+      initTypewriter();
+      setupContactForm();
+      setupProjectsCarousel();
+    }
+  </script>
 </Layout>

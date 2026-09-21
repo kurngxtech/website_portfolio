@@ -1,6 +1,6 @@
 ---
 import type { Project } from '../../data/projects';
-import Badge from '../ui/Badge.astro';
+import { t } from '../../i18n/translations';
 
 export interface Props {
   project: Project;
@@ -8,65 +8,140 @@ export interface Props {
 }
 
 const { project, featured = false } = Astro.props;
+const thumbnailSrc = project.thumbnail || '/images/project-saint-ink.svg';
+const externalUrl = project.liveUrl || project.repositoryUrl || null;
 ---
 
-<article
+<div
+  data-cursor="project"
   class:list={[
-    'group relative flex flex-col justify-between rounded-xl border transition-all duration-200 bg-white dark:bg-zinc-900/60 p-6 md:p-8',
+    'group relative flex flex-col w-[340px] sm:w-[460px] md:w-[520px] lg:w-[580px] flex-none rounded-2xl border transition-all duration-300 overflow-hidden bg-white/85 dark:bg-zinc-900/75 backdrop-blur-md shadow-md shadow-zinc-900/5 dark:shadow-black/30 hover:-translate-y-1 hover:shadow-xl hover:shadow-zinc-900/10 dark:hover:shadow-blue-500/10 cursor-pointer select-none',
     featured
-      ? 'border-zinc-300 dark:border-zinc-700/80 shadow-xs hover:border-blue-500/60 dark:hover:border-blue-500/60'
-      : 'border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700',
+      ? 'border-zinc-300/80 dark:border-zinc-700/70 hover:border-blue-500/50 dark:hover:border-blue-500/50'
+      : 'border-zinc-200/70 dark:border-zinc-800/70 hover:border-blue-500/40 dark:hover:border-blue-500/40',
   ]}
 >
-  <div>
-    <!-- Category & Status / Year -->
-    <div class="flex items-center justify-between gap-2 text-xs font-mono mb-3">
-      <span class="text-blue-600 dark:text-blue-400 font-medium">
+  {/* If externalUrl exists, clicking opens it in new tab. Otherwise, it is an interactive card ready for user links */}
+  {externalUrl ? (
+    <a
+      href={externalUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="absolute inset-0 z-20 focus:outline-none"
+      aria-label={`Open ${project.title} repository or deployment`}
+    >
+      <span class="sr-only">Open {project.title}</span>
+    </a>
+  ) : (
+    <button
+      type="button"
+      class="absolute inset-0 z-20 w-full h-full opacity-0 cursor-pointer focus:outline-none"
+      aria-label={`${project.title} - Deployment link coming soon`}
+    ></button>
+  )}
+
+  <!-- Mockup Browser Window Chrome (Compact) -->
+  <div class="flex items-center justify-between px-3.5 py-2 bg-zinc-100/80 dark:bg-zinc-800/60 border-b border-zinc-200/60 dark:border-zinc-800/60 text-xs">
+    <!-- Window Traffic Dots -->
+    <div class="flex items-center gap-1.5" aria-hidden="true">
+      <span class="w-2 h-2 rounded-full bg-red-400/80 dark:bg-red-500/70"></span>
+      <span class="w-2 h-2 rounded-full bg-amber-400/80 dark:bg-amber-500/70"></span>
+      <span class="w-2 h-2 rounded-full bg-emerald-400/80 dark:bg-emerald-500/70"></span>
+    </div>
+
+    <!-- Category & Year -->
+    <div class="flex items-center gap-1.5 text-[11px] font-sans font-medium text-zinc-500 dark:text-zinc-400">
+      <span
+        class="text-blue-600 dark:text-blue-400 font-semibold truncate max-w-[170px]"
+        data-i18n-en={project.category}
+        data-i18n-id={project.categoryId || project.category}
+      >
         {project.category}
       </span>
-      <span class="text-zinc-400 dark:text-zinc-500">
-        {project.year}
-      </span>
-    </div>
-
-    <!-- Title -->
-    <h3 class="text-xl md:text-2xl font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-      <a href={`/projects/${project.slug}`} class="focus:outline-none">
-        <span class="absolute inset-0 z-10" aria-hidden="true"></span>
-        {project.title}
-      </a>
-    </h3>
-
-    <!-- Description -->
-    <p class="mt-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-      {project.description}
-    </p>
-
-    <!-- Role Metadata -->
-    <div class="mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400 font-mono">
-      <span>Role:</span>
-      <span class="font-medium text-zinc-700 dark:text-zinc-300">{project.role}</span>
+      <span>·</span>
+      <span>{project.year}</span>
     </div>
   </div>
 
-  <!-- Tech tags & Case Study Link -->
-  <div class="mt-6 pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-    <div class="flex flex-wrap gap-1.5">
-      {project.technologies.slice(0, 4).map((tech) => (
-        <Badge variant="default" size="sm">
-          {tech}
-        </Badge>
-      ))}
-      {project.technologies.length > 4 && (
-        <Badge variant="outline" size="sm">
-          +{project.technologies.length - 4}
-        </Badge>
+  <!-- Compact Visual Showcase Canvas (Widescreen Cinematic Ratio) -->
+  <div class="relative w-full h-44 sm:h-48 md:h-52 overflow-hidden bg-zinc-950/90 border-b border-zinc-200/50 dark:border-zinc-800/50">
+    <img
+      src={thumbnailSrc}
+      alt={`${project.title} Preview`}
+      loading="lazy"
+      decoding="async"
+      width="580"
+      height="208"
+      class="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/50 via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
+
+    <!-- Quick Status / Action Pill on Image -->
+    <div class="absolute bottom-2.5 right-2.5 z-10">
+      {externalUrl ? (
+        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-sans font-medium bg-zinc-900/80 text-zinc-100 backdrop-blur-md border border-white/10 group-hover:bg-blue-600 group-hover:border-blue-500 transition-colors shadow-sm">
+          <span>{project.liveUrl ? 'Live Demo' : 'GitHub'}</span>
+          <span aria-hidden="true">↗</span>
+        </span>
+      ) : (
+        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-sans font-medium bg-zinc-900/70 text-zinc-300 backdrop-blur-md border border-white/10">
+          <span>Private Project</span>
+        </span>
       )}
     </div>
-
-    <span class="inline-flex items-center text-xs font-mono font-medium text-blue-600 dark:text-blue-400 group-hover:translate-x-0.5 transition-transform">
-      View Case Study <span class="ml-1" aria-hidden="true">→</span>
-    </span>
   </div>
-</article>
 
+  <!-- Editorial Project Details (Compact) -->
+  <div class="p-4 sm:p-5 flex flex-col justify-between flex-1 space-y-3.5">
+    <div>
+      <div class="flex items-start justify-between gap-2">
+        <h3 class="text-base sm:text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+          <span
+            data-i18n-en={project.title}
+            data-i18n-id={project.titleId || project.title}
+          >
+            {project.title}
+          </span>
+        </h3>
+      </div>
+
+      <!-- Description (3 lines max clamp) -->
+      <p
+        class="mt-1.5 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal line-clamp-3"
+        data-i18n-en={project.description}
+        data-i18n-id={project.descriptionId || project.description}
+      >
+        {project.description}
+      </p>
+
+      <!-- Role Metadata -->
+      <div class="mt-3 pt-2.5 border-t border-zinc-100 dark:border-zinc-800/60 flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400 font-sans">
+        <div class="flex items-center gap-1.5 truncate">
+          <span data-i18n-key="projects.card.role">{t('projects.card.role')}</span>
+          <span
+            class="font-medium text-zinc-800 dark:text-zinc-200 truncate"
+            data-i18n-en={project.role}
+            data-i18n-id={project.roleId || project.role}
+          >
+            {project.role}
+          </span>
+        </div>
+        <span class="text-zinc-400 shrink-0">{project.status === 'Deployed to Production' ? '● Prod' : '● Completed'}</span>
+      </div>
+    </div>
+
+    <!-- Tech tags -->
+    <div class="pt-1 flex flex-wrap gap-1">
+      {project.technologies.slice(0, 4).map((tech) => (
+        <span class="px-2 py-0.5 rounded-md text-[11px] font-sans font-medium bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border border-zinc-200/50 dark:border-zinc-700/50">
+          {tech}
+        </span>
+      ))}
+      {project.technologies.length > 4 && (
+        <span class="px-1.5 py-0.5 rounded-md text-[10px] font-sans font-medium bg-zinc-100/60 dark:bg-zinc-800/40 text-zinc-400">
+          +{project.technologies.length - 4}
+        </span>
+      )}
+    </div>
+  </div>
+</div>
