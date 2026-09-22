@@ -230,8 +230,7 @@ section[id] {
 
 .reveal-on-scroll {
    opacity: 0;
-   transform: translateY(14px);
-   transition: opacity 350ms cubic-bezier(0.16, 1, 0.3, 1), transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+   transform: translateY(16px);
    will-change: opacity, transform;
 }
 

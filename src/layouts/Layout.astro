@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import Navbar from '../components/layout/Navbar.astro';
 import Footer from '../components/layout/Footer.astro';
 import SEO from '../components/ui/SEO.astro';
@@ -20,6 +21,7 @@ const { title, description, article } = Astro.props;
 <html lang="en">
   <head>
     <SEO title={title} description={description} article={article} />
+    <ClientRouter />
 
     <!-- Performance: DNS Prefetch & Font Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
