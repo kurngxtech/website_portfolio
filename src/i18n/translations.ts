@@ -146,8 +146,8 @@ export const translations = {
       id: 'Email',
    },
    'about.value_email': {
-      en: 'gedebagusk@gmail.com',
-      id: 'gedebagusk@gmail.com',
+      en: 'gedebaguskurn@gmail.com',
+      id: 'gedebaguskurn@gmail.com',
    },
 
    // ==========================================
@@ -170,8 +170,8 @@ export const translations = {
       id: 'Lihat seluruh dokumentasi & arsip proyek →',
    },
    'projects.scroll_hint': {
-      en: 'Drag or scroll with mouse wheel / touch to explore projects →',
-      id: 'Geser atau gunakan scroll untuk melihat proyek lainnya →',
+      en: 'Continuous showcase · Hover cards to pause and inspect →',
+      id: 'Tampilan otomatis berkelanjutan · Arahkan kursor untuk menjeda dan melihat detail →',
    },
    'projects.card.role': {
       en: 'Role:',
@@ -294,16 +294,16 @@ export const translations = {
    // 05 / CONTACT & INQUIRY SECTION
    // ==========================================
    'contact.eyebrow': {
-      en: 'GET IN TOUCH',
-      id: 'HUBUNGI SAYA',
+      en: 'Get in Touch',
+      id: 'Hubungi Saya',
    },
    'contact.title': {
-      en: "Let's build something useful.",
-      id: 'Mari membangun sesuatu yang bermanfaat.',
+      en: 'Contact Me',
+      id: 'Kontak Saya',
    },
    'contact.desc': {
-      en: 'Open to full-time Software Engineering roles, international startups, and remote opportunities.',
-      id: 'Terbuka untuk peluang kerja Software Engineer purnawaktu, startup internasional, dan posisi remote.',
+      en: '',
+      id: '',
    },
    'contact.direct_heading': {
       en: 'Direct Communication',

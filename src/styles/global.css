@@ -363,6 +363,151 @@ section[id] {
          transparent 100%);
 }
 
+html.dark .carousel-mask-left {
+   background: linear-gradient(to right,
+         #09090b 0%,
+         rgba(9, 9, 11, 0.98) 15%,
+         rgba(9, 9, 11, 0.88) 30%,
+         rgba(9, 9, 11, 0.70) 50%,
+         rgba(9, 9, 11, 0.45) 70%,
+         rgba(9, 9, 11, 0.18) 85%,
+         rgba(9, 9, 11, 0) 100%);
+}
+
+html.dark .carousel-mask-right {
+   background: linear-gradient(to left,
+         #09090b 0%,
+         rgba(9, 9, 11, 0.98) 15%,
+         rgba(9, 9, 11, 0.88) 30%,
+         rgba(9, 9, 11, 0.70) 50%,
+         rgba(9, 9, 11, 0.45) 70%,
+         rgba(9, 9, 11, 0.18) 85%,
+         rgba(9, 9, 11, 0) 100%);
+}
+
+html:not(.dark) .carousel-mask-left {
+   background: linear-gradient(to right,
+         #fcfcfc 0%,
+         rgba(252, 252, 252, 0.98) 15%,
+         rgba(252, 252, 252, 0.88) 30%,
+         rgba(252, 252, 252, 0.70) 50%,
+         rgba(252, 252, 252, 0.45) 70%,
+         rgba(252, 252, 252, 0.18) 85%,
+         rgba(252, 252, 252, 0) 100%);
+}
+
+html:not(.dark) .carousel-mask-right {
+   background: linear-gradient(to left,
+         #fcfcfc 0%,
+         rgba(252, 252, 252, 0.98) 15%,
+         rgba(252, 252, 252, 0.88) 30%,
+         rgba(252, 252, 252, 0.70) 50%,
+         rgba(252, 252, 252, 0.45) 70%,
+         rgba(252, 252, 252, 0.18) 85%,
+         rgba(252, 252, 252, 0) 100%);
+}
+
+/* ==========================================================================
+   Interactive Contact Channel Cards & Dynamic Brand Outlines
+   ========================================================================== */
+.contact-card {
+   position: relative;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 1.125rem 1.25rem;
+   border-radius: 1rem;
+   background: rgba(255, 255, 255, 0.75);
+   border: 1px solid rgba(228, 228, 231, 0.8);
+   backdrop-filter: blur(12px);
+   -webkit-backdrop-filter: blur(12px);
+   text-decoration: none;
+   transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 250ms ease,
+      box-shadow 250ms ease,
+      background-color 250ms ease;
+   overflow: hidden;
+}
+
+html.dark .contact-card {
+   background: rgba(24, 24, 27, 0.65);
+   border-color: rgba(39, 39, 42, 0.8);
+}
+
+.contact-card:hover {
+   transform: translateY(-2px);
+}
+
+/* 1. Google Multi-Color Gradient Outline for Email */
+.contact-card-google {
+   position: relative;
+   background-clip: padding-box;
+}
+
+.contact-card-google::before {
+   content: '';
+   position: absolute;
+   inset: -1px;
+   border-radius: inherit;
+   padding: 1.5px;
+   background: conic-gradient(from 45deg, #4285F4, #EA4335, #FBBC05, #34A853, #4285F4);
+   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+   -webkit-mask-composite: xor;
+   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+   mask-composite: exclude;
+   opacity: 0;
+   transition: opacity 260ms ease;
+   pointer-events: none;
+   z-index: 2;
+}
+
+.contact-card-google:hover::before {
+   opacity: 1;
+}
+
+.contact-card-google:hover {
+   box-shadow: 0 10px 30px -10px rgba(66, 133, 244, 0.25),
+      0 4px 12px -2px rgba(234, 67, 53, 0.15);
+}
+
+/* 2. Instagram: Soft Pink / Magenta Outline */
+.contact-card-instagram:hover {
+   border-color: rgba(225, 48, 108, 0.7);
+   box-shadow: 0 10px 30px -10px rgba(225, 48, 108, 0.35);
+}
+
+/* 3. LinkedIn: Professional Light Blue Outline */
+.contact-card-linkedin:hover {
+   border-color: rgba(10, 102, 194, 0.75);
+   box-shadow: 0 10px 30px -10px rgba(10, 102, 194, 0.3);
+}
+
+/* 4. GitHub: Crisp Monochrome (White glow in dark, dark zinc in light) */
+html.dark .contact-card-github:hover {
+   border-color: rgba(255, 255, 255, 0.85);
+   box-shadow: 0 10px 30px -10px rgba(255, 255, 255, 0.2);
+}
+
+html:not(.dark) .contact-card-github:hover {
+   border-color: rgba(24, 24, 27, 0.85);
+   box-shadow: 0 10px 30px -10px rgba(24, 24, 27, 0.15);
+}
+
+/* 5. TikTok: Crisp Monochrome with Subtle Chromatic Accent */
+html.dark .contact-card-tiktok:hover {
+   border-color: rgba(255, 255, 255, 0.85);
+   box-shadow: 0 10px 30px -10px rgba(255, 255, 255, 0.2),
+      -2px 0 12px rgba(0, 242, 254, 0.25),
+      2px 0 12px rgba(254, 44, 85, 0.25);
+}
+
+html:not(.dark) .contact-card-tiktok:hover {
+   border-color: rgba(24, 24, 27, 0.85);
+   box-shadow: 0 10px 30px -10px rgba(24, 24, 27, 0.15),
+      -2px 0 10px rgba(0, 242, 254, 0.2),
+      2px 0 10px rgba(244, 63, 94, 0.2);
+}
+
 
 /* ==========================================================================
    Respect Reduced Motion Preference

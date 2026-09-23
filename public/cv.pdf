@@ -1,0 +1,413 @@
+%PDF-1.4
+%����
+1 0 obj
+<</Type/Catalog/Pages 2 0 R>>
+endobj
+2 0 obj
+<</Type/Pages/Kids[3 0 R]/Count 1>>
+endobj
+3 0 obj
+<</Type/Page/Parent 2 0 R/MediaBox[0 0 595.28 841.89]/Resources<</Font<</F1 5 0 R/F2 6 0 R/F3 7 0 R>>>>/Contents 4 0 R>>
+endobj
+4 0 obj
+<</Length 7161>>
+stream
+1 1 1 rg
+0 0 595.28 841.89 re f
+0.145 0.388 0.922 rg
+0 833.89 595.28 8 re f
+0.050 0.050 0.080 rg
+BT
+/F2 24 Tf
+50.00 770.00 Td
+(BAGUS KURNIAWAN) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 11 Tf
+50.00 752.00 Td
+(SOFTWARE ENGINEER  |  BACKEND & CLOUD FOCUS) Tj
+ET
+0.350 0.350 0.400 rg
+BT
+/F1 9 Tf
+50.00 736.00 Td
+(Email: gedebagusk@gmail.com   |   GitHub: github.com/kurngxtech   |   Portfolio: kurngxtech.dev   |   Indonesia) Tj
+ET
+0.850 0.850 0.880 RG
+1.0 w
+50.00 724.00 m 545.28 724.00 l S
+0.145 0.388 0.922 rg
+BT
+/F2 11 Tf
+50.00 702.00 Td
+(PROFESSIONAL SUMMARY) Tj
+ET
+0.880 0.900 0.940 RG
+0.75 w
+50.00 698.00 m 545.28 698.00 l S
+0.200 0.200 0.250 rg
+BT
+/F1 9 Tf
+50.00 684.00 Td
+(Software Engineer with a solid foundation in Information Systems and verified client-facing production delivery experience.) Tj
+ET
+0.200 0.200 0.250 rg
+BT
+/F1 9 Tf
+50.00 671.00 Td
+(Specializes in building reliable full-stack web applications, RESTful APIs, and relational database systems with PostgreSQL.) Tj
+ET
+0.200 0.200 0.250 rg
+BT
+/F1 9 Tf
+50.00 658.00 Td
+(Demonstrated hands-on experience deploying containerized services with Docker, implementing Row-Level Security \(RLS\), and) Tj
+ET
+0.200 0.200 0.250 rg
+BT
+/F1 9 Tf
+50.00 645.00 Td
+(authoring end-to-end automated tests with Playwright. Dedicated to clean architecture, security, and cloud scalability.) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 11 Tf
+50.00 624.00 Td
+(WORK EXPERIENCE & PRODUCTION DELIVERY) Tj
+ET
+0.880 0.900 0.940 RG
+0.75 w
+50.00 620.00 m 545.28 620.00 l S
+0.080 0.080 0.100 rg
+BT
+/F2 10.5 Tf
+50.00 606.00 Td
+(Full-Stack Software Engineer \(Internship / Client Project\)) Tj
+ET
+0.400 0.400 0.450 rg
+BT
+/F1 9 Tf
+450.28 606.00 Td
+(June 2025 - Present) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F3 9 Tf
+50.00 593.00 Td
+(Saint Ink Tattoo Studio  |  Production Client Deployment) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 9 Tf
+55.00 579.00 Td
+(-) Tj
+ET
+0.220 0.220 0.260 rg
+BT
+/F1 8.8 Tf
+65.00 579.00 Td
+(Engineered end-to-end booking and artist showcase web application using React, TypeScript, Tailwind CSS, and Supabase.) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 9 Tf
+55.00 566.00 Td
+(-) Tj
+ET
+0.220 0.220 0.260 rg
+BT
+/F1 8.8 Tf
+65.00 566.00 Td
+(Designed and implemented PostgreSQL relational schemas with Row-Level Security \(RLS\) policies for multi-tenant data isolation.) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 9 Tf
+55.00 553.00 Td
+(-) Tj
+ET
+0.220 0.220 0.260 rg
+BT
+/F1 8.8 Tf
+65.00 553.00 Td
+(Built automated End-to-End \(E2E\) testing suites using Playwright, verifying critical appointment scheduling workflows.) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 9 Tf
+55.00 540.00 Td
+(-) Tj
+ET
+0.220 0.220 0.260 rg
+BT
+/F1 8.8 Tf
+65.00 540.00 Td
+(Containerized frontend and backend services using Docker, ensuring reproducible staging and production environments.) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 9 Tf
+55.00 527.00 Td
+(-) Tj
+ET
+0.220 0.220 0.260 rg
+BT
+/F1 8.8 Tf
+65.00 527.00 Td
+(Optimized client-side rendering and asset delivery, cutting initial page load time by 35% across mobile networks.) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 11 Tf
+50.00 506.00 Td
+(KEY TECHNICAL PROJECTS) Tj
+ET
+0.880 0.900 0.940 RG
+0.75 w
+50.00 502.00 m 545.28 502.00 l S
+0.080 0.080 0.100 rg
+BT
+/F2 10 Tf
+50.00 488.00 Td
+(Cinema Ticketing System) Tj
+ET
+0.400 0.400 0.450 rg
+BT
+/F1 8.5 Tf
+400.28 488.00 Td
+(Stack: TypeScript, Node.js, PostgreSQL) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 8.5 Tf
+55.00 476.00 Td
+(-) Tj
+ET
+0.220 0.220 0.260 rg
+BT
+/F1 8.5 Tf
+65.00 476.00 Td
+(Architected a scalable seat reservation platform with transactional booking handling to prevent double-booking conflicts.) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 8.5 Tf
+55.00 464.00 Td
+(-) Tj
+ET
+0.220 0.220 0.260 rg
+BT
+/F1 8.5 Tf
+65.00 464.00 Td
+(Implemented secure JWT authentication and role-based access control \(RBAC\) for cinema managers and customers.) Tj
+ET
+0.080 0.080 0.100 rg
+BT
+/F2 10 Tf
+50.00 448.00 Td
+(SmartWaste IoT & Real-time Monitoring Dashboard) Tj
+ET
+0.400 0.400 0.450 rg
+BT
+/F1 8.5 Tf
+400.28 448.00 Td
+(Stack: IoT Sensors, Python, Web Dashboard) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 8.5 Tf
+55.00 436.00 Td
+(-) Tj
+ET
+0.220 0.220 0.260 rg
+BT
+/F1 8.5 Tf
+65.00 436.00 Td
+(Built an IoT telemetry pipeline collecting fill-level and sensor metrics, aggregating real-time analytics on a web dashboard.) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 8.5 Tf
+55.00 424.00 Td
+(-) Tj
+ET
+0.220 0.220 0.260 rg
+BT
+/F1 8.5 Tf
+65.00 424.00 Td
+(Designed threshold-based notification alerts to optimize municipal waste pickup routes and reduce fuel expenditure.) Tj
+ET
+0.080 0.080 0.100 rg
+BT
+/F2 10 Tf
+50.00 408.00 Td
+(Android Health & Activity Tracking Application) Tj
+ET
+0.400 0.400 0.450 rg
+BT
+/F1 8.5 Tf
+400.28 408.00 Td
+(Stack: Kotlin, Android SDK, SQLite) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 8.5 Tf
+55.00 396.00 Td
+(-) Tj
+ET
+0.220 0.220 0.260 rg
+BT
+/F1 8.5 Tf
+65.00 396.00 Td
+(Developed native Android application for monitoring daily fitness activities with local persistence and background telemetry.) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 8.5 Tf
+55.00 384.00 Td
+(-) Tj
+ET
+0.220 0.220 0.260 rg
+BT
+/F1 8.5 Tf
+65.00 384.00 Td
+(Implemented clean MVVM architecture ensuring robust testability and responsive UI state management.) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 11 Tf
+50.00 364.00 Td
+(EDUCATION) Tj
+ET
+0.880 0.900 0.940 RG
+0.75 w
+50.00 360.00 m 545.28 360.00 l S
+0.080 0.080 0.100 rg
+BT
+/F2 10 Tf
+50.00 346.00 Td
+(Bachelor of Information Systems) Tj
+ET
+0.400 0.400 0.450 rg
+BT
+/F1 9 Tf
+445.28 346.00 Td
+(Expected Graduation: 2026) Tj
+ET
+0.250 0.250 0.300 rg
+BT
+/F1 8.8 Tf
+50.00 333.00 Td
+(Cumulative GPA: 3.82 / 4.00   |   Focus: Software Engineering, Database Systems, Computer Networks) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 11 Tf
+50.00 315.00 Td
+(TECHNICAL SKILLS & COMPETENCIES) Tj
+ET
+0.880 0.900 0.940 RG
+0.75 w
+50.00 311.00 m 545.28 311.00 l S
+0.145 0.388 0.922 rg
+BT
+/F2 8.8 Tf
+50.00 297.00 Td
+(Languages & Core:) Tj
+ET
+0.200 0.200 0.250 rg
+BT
+/F1 8.8 Tf
+165.00 297.00 Td
+(TypeScript, JavaScript \(ESNext\), Python, SQL, HTML5, CSS3 / Modern Tailwind CSS) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 8.8 Tf
+50.00 284.00 Td
+(Backend & Frameworks:) Tj
+ET
+0.200 0.200 0.250 rg
+BT
+/F1 8.8 Tf
+165.00 284.00 Td
+(Node.js, Express, React, Vite, Astro, RESTful API Design, Microservices Concepts) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 8.8 Tf
+50.00 271.00 Td
+(Databases & Storage:) Tj
+ET
+0.200 0.200 0.250 rg
+BT
+/F1 8.8 Tf
+165.00 271.00 Td
+(PostgreSQL, Supabase, Row-Level Security \(RLS\), Schema Migrations, Redis Caching) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 8.8 Tf
+50.00 258.00 Td
+(DevOps & Infrastructure:) Tj
+ET
+0.200 0.200 0.250 rg
+BT
+/F1 8.8 Tf
+165.00 258.00 Td
+(Docker, Containerization, Git, GitHub Actions CI/CD, Linux Server Administration) Tj
+ET
+0.145 0.388 0.922 rg
+BT
+/F2 8.8 Tf
+50.00 245.00 Td
+(Testing & Quality:) Tj
+ET
+0.200 0.200 0.250 rg
+BT
+/F1 8.8 Tf
+165.00 245.00 Td
+(Playwright \(E2E Automated Testing\), Unit Testing, Lighthouse Performance Auditing) Tj
+ET
+0.880 0.880 0.900 RG
+0.5 w
+50.00 47.00 m 545.28 47.00 l S
+0.500 0.500 0.550 rg
+BT
+/F1 7.5 Tf
+50.00 35.00 Td
+(Bagus Kurniawan - Curriculum Vitae | Verified Technical Portfolio: https://kurngxtech.dev) Tj
+ET
+0.500 0.500 0.550 rg
+BT
+/F1 7.5 Tf
+485.28 35.00 Td
+(Last Updated: 2026) Tj
+ET
+endstream
+endobj
+5 0 obj
+<</Type/Font/Subtype/Type1/BaseFont/Helvetica/Encoding/WinAnsiEncoding>>
+endobj
+6 0 obj
+<</Type/Font/Subtype/Type1/BaseFont/Helvetica-Bold/Encoding/WinAnsiEncoding>>
+endobj
+7 0 obj
+<</Type/Font/Subtype/Type1/BaseFont/Helvetica-Oblique/Encoding/WinAnsiEncoding>>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000015 00000 n 
+0000000060 00000 n 
+0000000111 00000 n 
+0000000247 00000 n 
+0000007458 00000 n 
+0000007546 00000 n 
+0000007639 00000 n 
+trailer
+<</Size 8/Root 1 0 R>>
+startxref
+7735
+%%EOF
