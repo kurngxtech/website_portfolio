@@ -9,62 +9,52 @@ export interface Props {
 
 const { project, featured = false } = Astro.props;
 const thumbnailSrc = project.thumbnail || '/images/project-saint-ink.svg';
-const externalUrl = project.liveUrl || project.repositoryUrl || null;
+const caseStudyUrl = `/projects/${project.slug}`;
 ---
 
 <div
-  data-cursor="project"
   class:list={[
-    'group relative flex flex-col w-[340px] sm:w-[460px] md:w-[520px] lg:w-[580px] flex-none rounded-2xl border transition-all duration-300 overflow-hidden bg-white/85 dark:bg-zinc-900/75 backdrop-blur-md shadow-md shadow-zinc-900/5 dark:shadow-black/30 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-zinc-900/10 dark:hover:shadow-blue-500/10 cursor-pointer select-none',
+    'group relative flex flex-col w-full rounded-2xl border transition-all duration-300 overflow-hidden bg-white/85 dark:bg-zinc-900/75 backdrop-blur-md shadow-md shadow-zinc-900/5 dark:shadow-black/30 hover:-translate-y-1 hover:shadow-xl hover:shadow-zinc-900/10 dark:hover:shadow-blue-500/5',
     featured
-      ? 'border-zinc-300/80 dark:border-zinc-700/70 hover:border-blue-500/50 dark:hover:border-blue-500/50'
+      ? 'border-zinc-300/90 dark:border-zinc-700/80 hover:border-blue-500/50 dark:hover:border-blue-500/50'
       : 'border-zinc-200/70 dark:border-zinc-800/70 hover:border-blue-500/40 dark:hover:border-blue-500/40',
   ]}
 >
-  {/* If externalUrl exists, clicking opens it in new tab. Otherwise, it is an interactive card ready for user links */}
-  {externalUrl ? (
-    <a
-      href={externalUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="absolute inset-0 z-20 focus:outline-none"
-      aria-label={`Open ${project.title} repository or deployment`}
-    >
-      <span class="sr-only">Open {project.title}</span>
-    </a>
-  ) : (
-    <button
-      type="button"
-      class="absolute inset-0 z-20 w-full h-full opacity-0 cursor-pointer focus:outline-none"
-      aria-label={`${project.title} - Deployment link coming soon`}
-    ></button>
-  )}
+  <!-- Main Card Anchor linking directly to the Deep Case Study -->
+  <a
+    href={caseStudyUrl}
+    class="absolute inset-0 z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-inset rounded-2xl"
+    aria-label={`Read case study for ${project.title}`}
+  >
+    <span class="sr-only">Read case study for {project.title}</span>
+  </a>
 
-  <!-- Mockup Browser Window Chrome (Compact) -->
-  <div class="flex items-center justify-between px-3.5 py-2 bg-zinc-100/80 dark:bg-zinc-800/60 border-b border-zinc-200/60 dark:border-zinc-800/60 text-xs">
-    <!-- Window Traffic Dots -->
-    <div class="flex items-center gap-1.5" aria-hidden="true">
-      <span class="w-2 h-2 rounded-full bg-red-400/80 dark:bg-red-500/70"></span>
-      <span class="w-2 h-2 rounded-full bg-amber-400/80 dark:bg-amber-500/70"></span>
-      <span class="w-2 h-2 rounded-full bg-emerald-400/80 dark:bg-emerald-500/70"></span>
-    </div>
-
-    <!-- Category & Year -->
-    <div class="flex items-center gap-1.5 text-[11px] font-sans font-medium text-zinc-500 dark:text-zinc-400">
+  <!-- Editorial Card Header (Category, Status & Year) -->
+  <div class="flex items-center justify-between px-4 py-2.5 bg-zinc-100/70 dark:bg-zinc-800/50 border-b border-zinc-200/60 dark:border-zinc-800/60 text-xs">
+    <div class="flex items-center gap-2">
       <span
-        class="text-blue-600 dark:text-blue-400 font-semibold truncate max-w-[170px]"
+        class:list={[
+          'w-1.5 h-1.5 rounded-full shrink-0',
+          project.status === 'Deployed to Production' ? 'bg-emerald-500' : 'bg-blue-500',
+        ]}
+        aria-hidden="true"
+      ></span>
+      <span
+        class="text-[11px] font-sans font-semibold text-zinc-700 dark:text-zinc-300 truncate max-w-[200px]"
         data-i18n-en={project.category}
         data-i18n-id={project.categoryId || project.category}
       >
         {project.category}
       </span>
-      <span>·</span>
+    </div>
+
+    <div class="flex items-center gap-2 text-[11px] font-mono text-zinc-400">
       <span>{project.year}</span>
     </div>
   </div>
 
-  <!-- Compact Visual Showcase Canvas (Widescreen Cinematic Ratio) -->
-  <div class="relative w-full h-44 sm:h-48 md:h-52 overflow-hidden bg-zinc-950/90 border-b border-zinc-200/50 dark:border-zinc-800/50">
+  <!-- Showcase Canvas -->
+  <div class="relative w-full h-48 sm:h-52 overflow-hidden bg-zinc-950/90 border-b border-zinc-200/50 dark:border-zinc-800/50">
     <img
       src={thumbnailSrc}
       alt={`${project.title} Preview`}
@@ -72,26 +62,48 @@ const externalUrl = project.liveUrl || project.repositoryUrl || null;
       decoding="async"
       width="580"
       height="208"
-      class="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+      class="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
     />
-    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/50 via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/60 via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
 
-    <!-- Quick Status / Action Pill on Image -->
-    <div class="absolute bottom-2.5 right-2.5 z-10">
-      {externalUrl ? (
-        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-sans font-medium bg-zinc-900/80 text-zinc-100 backdrop-blur-md border border-white/10 group-hover:bg-blue-600 group-hover:border-blue-500 transition-colors shadow-sm">
-          <span>{project.liveUrl ? 'Live Demo' : 'GitHub'}</span>
-          <span class="inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true">↗</span>
-        </span>
-      ) : (
-        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-sans font-medium bg-zinc-900/70 text-zinc-300 backdrop-blur-md border border-white/10">
-          <span>Private Project</span>
-        </span>
+    <!-- External Secondary Links (Higher z-index so clicking opens demo/repo) -->
+    <div class="absolute top-2.5 right-2.5 z-20 flex items-center gap-1.5">
+      {project.liveUrl && (
+        <a
+          href={project.liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-sans font-medium bg-zinc-900/80 text-zinc-200 backdrop-blur-md border border-white/15 hover:bg-blue-600 hover:text-white transition-colors shadow-sm"
+          title="Open live deployment"
+        >
+          <span>Live</span>
+          <span aria-hidden="true">↗</span>
+        </a>
       )}
+      {project.repositoryUrl && (
+        <a
+          href={project.repositoryUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-sans font-medium bg-zinc-900/80 text-zinc-200 backdrop-blur-md border border-white/15 hover:bg-zinc-800 hover:text-white transition-colors shadow-sm"
+          title="Open source code repository"
+        >
+          <span>Repo</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      )}
+    </div>
+
+    <!-- Case Study Indicator Pill -->
+    <div class="absolute bottom-2.5 left-3 z-10">
+      <span class="inline-flex items-center gap-1 text-[11px] font-sans font-medium text-zinc-200 bg-zinc-900/70 px-2.5 py-1 rounded-md backdrop-blur-md border border-white/10 group-hover:border-blue-400/40 group-hover:text-blue-200 transition-colors">
+        <span>Case Study</span>
+        <span class="transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">→</span>
+      </span>
     </div>
   </div>
 
-  <!-- Editorial Project Details (Compact) -->
+  <!-- Editorial Project Details -->
   <div class="p-4 sm:p-5 flex flex-col justify-between flex-1 space-y-3.5">
     <div>
       <div class="flex items-start justify-between gap-2">
@@ -126,7 +138,9 @@ const externalUrl = project.liveUrl || project.repositoryUrl || null;
             {project.role}
           </span>
         </div>
-        <span class="text-zinc-400 shrink-0">{project.status === 'Deployed to Production' ? '● Prod' : '● Completed'}</span>
+        <span class="text-zinc-400 shrink-0 font-mono text-[10px]">
+          {project.status === 'Deployed to Production' ? '● Prod Verified' : '● Completed'}
+        </span>
       </div>
     </div>
 

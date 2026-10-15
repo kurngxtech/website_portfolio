@@ -66,8 +66,8 @@ export const translations = {
       id: 'Halo!, Saya Bagus Kurniawan',
    },
    'hero.desc': {
-      en: "Hello! I'm Software Engineering focused on building reliable web applications and production-ready systems, with a focus on backend engineering, cloud infrastructure, and application security.",
-      id: 'Halo! Saya seorang Software Engineer yang berfokus pada pengembangan aplikasi web yang andal dan sistem siap produksi, dengan minat pada backend engineering, infrastruktur cloud, serta keamanan aplikasi.',
+      en: "I am a Software Engineer focused on building reliable web applications and production-ready systems, with a growing focus on backend engineering, cloud infrastructure, and application security.",
+      id: 'Saya seorang Software Engineer yang berfokus pada pengembangan aplikasi web yang andal dan sistem siap produksi, dengan minat pada backend engineering, infrastruktur cloud, serta keamanan aplikasi.',
    },
    'hero.location': {
       en: 'Based in Indonesia · Open to remote international opportunities',
@@ -126,12 +126,12 @@ export const translations = {
       id: 'Bagus Kurniawan',
    },
    'about.label_pob': {
-      en: 'Place of Birth',
-      id: 'Tempat Lahir',
+      en: 'Primary Focus',
+      id: 'Fokus Utama',
    },
    'about.value_pob': {
-      en: 'Bali, Indonesia',
-      id: 'Bali, Indonesia',
+      en: 'Backend & Cloud Systems',
+      id: 'Sistem Backend & Cloud',
    },
    'about.label_gpa': {
       en: 'GPA',

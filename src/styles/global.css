@@ -470,42 +470,43 @@ html.dark .contact-card {
       0 4px 12px -2px rgba(234, 67, 53, 0.15);
 }
 
-/* 2. Instagram: Soft Pink / Magenta Outline */
+/* 2. Instagram: Clean Subtle Neutral */
 .contact-card-instagram:hover {
-   border-color: rgba(225, 48, 108, 0.7);
-   box-shadow: 0 10px 30px -10px rgba(225, 48, 108, 0.35);
+   border-color: rgba(39, 39, 42, 0.4);
+   box-shadow: 0 8px 24px -6px rgba(24, 24, 27, 0.08);
+}
+
+html.dark .contact-card-instagram:hover {
+   border-color: rgba(161, 161, 170, 0.4);
+   box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.4);
 }
 
 /* 3. LinkedIn: Professional Light Blue Outline */
 .contact-card-linkedin:hover {
    border-color: rgba(10, 102, 194, 0.75);
-   box-shadow: 0 10px 30px -10px rgba(10, 102, 194, 0.3);
+   box-shadow: 0 8px 24px -6px rgba(10, 102, 194, 0.25);
 }
 
 /* 4. GitHub: Crisp Monochrome (White glow in dark, dark zinc in light) */
 html.dark .contact-card-github:hover {
    border-color: rgba(255, 255, 255, 0.85);
-   box-shadow: 0 10px 30px -10px rgba(255, 255, 255, 0.2);
+   box-shadow: 0 8px 24px -6px rgba(255, 255, 255, 0.15);
 }
 
 html:not(.dark) .contact-card-github:hover {
    border-color: rgba(24, 24, 27, 0.85);
-   box-shadow: 0 10px 30px -10px rgba(24, 24, 27, 0.15);
+   box-shadow: 0 8px 24px -6px rgba(24, 24, 27, 0.12);
 }
 
-/* 5. TikTok: Crisp Monochrome with Subtle Chromatic Accent */
+/* 5. TikTok: Crisp Monochrome */
 html.dark .contact-card-tiktok:hover {
    border-color: rgba(255, 255, 255, 0.85);
-   box-shadow: 0 10px 30px -10px rgba(255, 255, 255, 0.2),
-      -2px 0 12px rgba(0, 242, 254, 0.25),
-      2px 0 12px rgba(254, 44, 85, 0.25);
+   box-shadow: 0 8px 24px -6px rgba(255, 255, 255, 0.15);
 }
 
 html:not(.dark) .contact-card-tiktok:hover {
    border-color: rgba(24, 24, 27, 0.85);
-   box-shadow: 0 10px 30px -10px rgba(24, 24, 27, 0.15),
-      -2px 0 10px rgba(0, 242, 254, 0.2),
-      2px 0 10px rgba(244, 63, 94, 0.2);
+   box-shadow: 0 8px 24px -6px rgba(24, 24, 27, 0.12);
 }
 
 
