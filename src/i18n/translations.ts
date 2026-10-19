@@ -251,7 +251,87 @@ export const translations = {
    },
 
    // ==========================================
-   // 04 / TECHNICAL SKILLS SECTION
+   // 03b / ONGOING STUDY SECTION
+    // ==========================================
+    'study.eyebrow': {
+      en: 'EDUCATION',
+      id: 'PENDIDIKAN',
+    },
+    'study.title': {
+      en: 'Ongoing Study',
+      id: 'Studi Berjalan',
+    },
+    'study.deco': {
+      en: 'EDUCATION',
+      id: 'PENDIDIKAN',
+    },
+    'study.badge': {
+      en: 'International Dual Degree',
+      id: 'Dual Degree Internasional',
+    },
+    'study.gpa': {
+      en: 'GPA 3.75 / 4.00',
+      id: 'IPK 3,75 / 4,00',
+    },
+    'study.degree': {
+      en: 'Bachelor of Information Systems',
+      id: 'Sarjana Sistem Informasi',
+    },
+    'study.since': {
+      en: '(2023 – Present)',
+      id: '(2023 – Sekarang)',
+    },
+    'study.institutions': {
+      en: 'ITB STIKOM Bali & HELP University Malaysia',
+      id: 'ITB STIKOM Bali & HELP University Malaysia',
+    },
+    'study.desc_text': {
+      en: 'Currently pursuing a Bachelor\'s degree in Information Systems through an international dual-degree partnership between ITB STIKOM Bali and HELP University Malaysia. This academic program combines internationally aligned computing education with practical software engineering knowledge and skills.',
+      id: 'Saat ini menempuh pendidikan Sarjana Sistem Informasi melalui kemitraan dual degree internasional antara ITB STIKOM Bali dan HELP University Malaysia. Program ini memadukan pendidikan komputasi berstandar internasional dengan pengetahuan dan keterampilan rekayasa perangkat lunak yang praktis.',
+    },
+    'study.feat1_title': {
+      en: 'International Standard Curriculum',
+      id: 'Kurikulum Standar Internasional',
+    },
+    'study.feat1_desc': {
+      en: 'An internationally oriented computing curriculum designed to build relevant technical competencies and prepare students for careers in the global technology industry.',
+      id: 'Kurikulum komputasi berorientasi internasional yang dirancang untuk membangun kompetensi teknis yang relevan dan mempersiapkan mahasiswa berkarier di industri teknologi global.',
+    },
+    'study.feat2_title': {
+      en: 'Applied Software Engineering',
+      id: 'Rekayasa Perangkat Lunak Terapan',
+    },
+    'study.feat2_desc': {
+      en: 'Emphasizes modern software development practices, scalable system architecture, and the practical implementation of digital solutions.',
+      id: 'Menekankan praktik pengembangan perangkat lunak modern, arsitektur sistem yang skalabel, dan implementasi praktis solusi digital.',
+    },
+    'study.stikom_name': {
+      en: 'ITB STIKOM Bali',
+      id: 'ITB STIKOM Bali',
+    },
+    'study.stikom_location': {
+      en: 'Renon, Denpasar',
+      id: 'Renon, Denpasar',
+    },
+    'study.stikom_tag': {
+      en: 'Home Campus',
+      id: 'Kampus Asal',
+    },
+    'study.help_name': {
+      en: 'HELP University',
+      id: 'HELP University',
+    },
+    'study.help_location': {
+      en: 'Subang 2, Malaysia',
+      id: 'Subang 2, Malaysia',
+    },
+    'study.help_tag': {
+      en: 'Partner Campus',
+      id: 'Kampus Mitra',
+    },
+
+    // ==========================================
+    // 04 / TECHNICAL SKILLS SECTION
    // ==========================================
    'skills.eyebrow': {
       en: 'TECHNICAL SKILLS',
